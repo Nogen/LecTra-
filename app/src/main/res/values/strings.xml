@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name">Lectra</string>
+    <string-array name="subjs_array">
+        <item>ANATOMIA</item>
+        <item>FISIOLOGIA</item>
+        <item>INFERMIERISTICA GENERALE E CLINICA</item>
+        <item>PRINCIPI DI ASSISTENZA INFERMIERISTICA</item>
+        <item>FISICA</item>
+        <item>STATISTICA</item>
+        <item>INFORMATICA</item>
+        <item>LINGUA INGLESE</item>
+        <item>IGIENE GENERALE ED APPLICATA</item>
+        <item>MICROBIOLOGIA E MICROBIOLOGIA CLINICA</item>
+        <item>PATOLOGIA GENERALE</item>
+        <item>INFERMIERISTICA IN  SANITÀ PUBBLICA E PREVENTIVA</item>
+        <item>BIOCHIMICA</item>
+        <item>ISTOLOGIA</item>
+        <item>GENETICA</item>
+        <item>BIOLOGIA</item>
+        <item>PSICOLOGIA CLINICA</item>
+        <item>PSICOLOGIA GENERALE</item>
+        <item>SCIENZE INFERMIERISTICHE GENERALI E CLINICHE</item>
+        <item>TIROCINIO I</item>
+        <item>TIROCINIO II</item>
+        <item>TIROCINIO III</item>
+        <item>CARDIOCHIRURGIA</item>
+        <item>NEUROCHIRURGIA</item>
+        <item>UROLOGIA</item>
+        <item>OTORINOLARINGOIATRIA</item>
+        <item>MALATTIE DELL’APPARATO VISIVO</item>
+        <item>SCIENZE INFERMIERISTICHE SPECIALISTICHE IN CHIRURGIA</item>
+        <item>ENDOCRINOLOGIA</item>
+        <item>GASTROENTEROLOGIA</item>
+        <item>MALATTIE DEL SANGUE</item>
+        <item>NEFROLOGIA</item>
+        <item>REUMATOLOGIA</item>
+        <item>SCIENZE INFERMIERISTICHE SPECIALISTICHE IN CHIRURGIASCIENZE INFERMIERISTICHE SPECIALISTICHE IN CHIRURGIA</item>
+        <item>ANATOMIA PATOLOGICA</item>
+        <item>BIOCHIMICA CLINICA</item>
+        <item>IMMUNOLOGIA</item>
+        <item>PATOLOGIA CLINICA</item>
+        <item>GERIATRIA</item>
+        <item>MALATTIE INFETTIVE</item>
+        <item>MEDICINA DEL LAVORO</item>
+        <item>ONCOLOGIA MEDICA</item>
+        <item>EBN</item>
+        <item>INFERMIERISTICA COMUNITARIA E DI FAMIGLIA</item>
+        <item>PEDIATRIA</item>
+        <item>GINECOLOGIA E OSTETRICIA</item>
+        <item>SCIENZE INFERMIERISTICHE OSTETRICO‐GINECOLOGICHE  E PEDIATRICHE</item>
+        <item>ALLERGOLOGIA E IMMUNOLOGIA</item>
+        <item>FARMACOLOGIA</item>
+        <item>MEDICINA INTERNA</item>
+        <item>CHIRURGIA GENERALE</item>
+        <item>INFERMIERISTICA CLINICA IN CHIRURGIA</item>
+        <item>RADIOPROTEZIONE</item>
+        <item>MEDICNA LEGALE</item>
+        <item>DIRITTO DEL LAVORO</item>
+        <item>ETICA E DEONTOLOGIA APPLICATA ALLA PROFESSIONE INFERMIERISTICA</item>
+        <item>MALATTIE DELL’APPARATO RESPIRATORIO</item>
+        <item>MALATTIE DELL’APPARATO CARDIOVASCOLARE</item>
+        <item>ANESTESIOLOGIA</item>
+        <item>INFERMIERISTICA IN AREA CRITICA E NELL’EMERGENZA</item>
+        <item>NEUROLOGIA</item>
+        <item>MALATTIE APPARATO LOCOMOTORE</item>
+        <item>PSICHIATRIA</item>
+        <item>INFERMIERISTICA NELLA DISABILITÀ</item>
+    </string-array>
+</resources>
