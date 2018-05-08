@@ -25,7 +25,6 @@ public class CreateItemViewModel extends ViewModel {
 
         @Override
         protected Void doInBackground(ListItemSubj... listItemSubjs) {
-            Log.e("PORCO", listItemSubjs[0].toString());
             subjectRepository.InsertSubj(listItemSubjs[0]);
             return null;
         }

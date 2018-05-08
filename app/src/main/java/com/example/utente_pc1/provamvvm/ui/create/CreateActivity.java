@@ -48,7 +48,9 @@ public class CreateActivity extends AppCompatActivity {
 
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                curdate = dayOfMonth + "/" + (month + 1) + "/" + year;
+                String day = (dayOfMonth > 9) ? "" + dayOfMonth : "0" + dayOfMonth;
+                String mon = ((month + 1) > 9) ? "" + (month + 1) : "0" + (month + 1);
+                curdate = day + "/" + mon + "/" + year;
             }
         });
 
@@ -70,7 +72,7 @@ public class CreateActivity extends AppCompatActivity {
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleDateFormat conv = new SimpleDateFormat("dd/MM/yy");
+                SimpleDateFormat conv = new SimpleDateFormat("dd/MM/yyyy");
                 String defdate = conv.format(calendarView.getDate());
                 ListItemSubj tmp = new ListItemSubj();
                 try {
