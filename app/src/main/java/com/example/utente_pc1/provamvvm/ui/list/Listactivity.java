@@ -132,6 +132,7 @@ public class Listactivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ListItemSubj item = listOfData.get(this.getAdapterPosition());
+                startDetailActivity();
 
             }
         }
