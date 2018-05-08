@@ -1,7 +1,6 @@
 package com.example.utente_pc1.provamvvm.ui.create;
 
-import android.app.ListActivity;
-import android.arch.persistence.room.Room;
+
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +24,7 @@ import com.example.utente_pc1.provamvvm.viewmodel.CreateItemViewModel;
 import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
+
 
 public class CreateActivity extends AppCompatActivity {
     private Subjectdb db;
