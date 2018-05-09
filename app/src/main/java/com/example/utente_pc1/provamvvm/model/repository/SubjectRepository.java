@@ -17,9 +17,6 @@ public class SubjectRepository {
         this.listItemSubjDao = listItemSubjDao;
     }
 
-    public LiveData<ListItemSubj> getItem(String name, String date) {
-        return listItemSubjDao.getsubj(name, date);
-    }
 
     public LiveData<List<ListItemSubj>> getListItemCollection() {
         return this.listItemSubjDao.getItemCollection();
@@ -35,6 +32,10 @@ public class SubjectRepository {
 
     public LiveData<Integer> getTotalHours(String name) {
         return this.listItemSubjDao.getTotalHours(name);
+    }
+
+    public LiveData<List<String>> getDates(String name) {
+        return this.getDates(name);
     }
 
     public void InsertSubj(ListItemSubj listItemSubj) {

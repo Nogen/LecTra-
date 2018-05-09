@@ -85,5 +85,6 @@ public class CreateActivity extends AppCompatActivity {
 
     public void startListActivity() {
         startActivity(new Intent(this, Listactivity.class));
+        finish();
     }
 }

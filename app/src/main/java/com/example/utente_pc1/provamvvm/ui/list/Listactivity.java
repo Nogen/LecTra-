@@ -74,6 +74,7 @@ public class Listactivity extends AppCompatActivity {
 
     public void startCreateActivity() {
         startActivity(new Intent(this, CreateActivity.class));
+        finish();
     }
 
 

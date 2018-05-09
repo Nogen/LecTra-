@@ -13,9 +13,6 @@ import java.util.List;
 @Dao
 public interface ListItemSubjDao {
 
-    @Query("SELECT * FROM listitemsubj WHERE name = :name AND date = :date")
-    public LiveData<ListItemSubj> getsubj(String name, String date);
-
     @Query("SELECT * FROM listitemsubj")
     public LiveData<List<ListItemSubj>> getItemCollection();
 
@@ -27,6 +24,9 @@ public interface ListItemSubjDao {
 
     @Query("SELECT SUM(hours) FROM listitemsubj WHERE name = :name")
     public LiveData<Integer> getTotalHours(String name);
+
+    @Query("SELECT date FROM listitemsubj WHERE name = :name")
+    public LiveData<String> getDates(String name);
 
     @Delete
     public void deleteListItemSubj(ListItemSubj listItemSubj);
