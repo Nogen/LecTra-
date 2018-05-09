@@ -7,9 +7,12 @@ import com.example.utente_pc1.provamvvm.model.data.ListItemSubjDao;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class SubjectRepository {
     private ListItemSubjDao listItemSubjDao;
 
+    @Inject
     public SubjectRepository(ListItemSubjDao listItemSubjDao){
         this.listItemSubjDao = listItemSubjDao;
     }

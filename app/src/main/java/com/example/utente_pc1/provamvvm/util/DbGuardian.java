@@ -11,6 +11,6 @@ public class DbGuardian {
 
     public static void init(Context context){
         subjectdb =  Room.databaseBuilder(context,
-                Subjectdb.class, "prova").build();
+                Subjectdb.class, "LecTraDb").build();
     }
 }

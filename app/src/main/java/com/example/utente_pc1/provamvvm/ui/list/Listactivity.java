@@ -2,7 +2,6 @@ package com.example.utente_pc1.provamvvm.ui.list;
 
 
 import android.arch.lifecycle.Observer;
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,35 +16,34 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.utente_pc1.provamvvm.R;
+import com.example.utente_pc1.provamvvm.LecApplication;
 import com.example.utente_pc1.provamvvm.model.data.ListItemSubj;
-import com.example.utente_pc1.provamvvm.model.data.ListItemSubjDao;
-import com.example.utente_pc1.provamvvm.model.data.Subjectdb;
-import com.example.utente_pc1.provamvvm.model.repository.SubjectRepository;
 import com.example.utente_pc1.provamvvm.ui.create.CreateActivity;
 import com.example.utente_pc1.provamvvm.ui.detail.DetailActivity;
-import com.example.utente_pc1.provamvvm.util.DbGuardian;
-import com.example.utente_pc1.provamvvm.viewmodel.CreateItemViewModel;
 import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;
 import com.example.utente_pc1.provamvvm.viewmodel.ListItemViewModel;
 
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class Listactivity extends AppCompatActivity {
 
-    private Subjectdb db;
-    private ListItemSubjDao dao;
-    private SubjectRepository repository;
-    private CustomViewModelFactory vFactory;
+    @Inject
+    CustomViewModelFactory vFactory;
     List<ListItemSubj> listOfData;
     private LayoutInflater layoutInflater;
     private RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listactivity);
 
+
+        ((LecApplication) getApplication()).getLecComponent().inject(this);
 
         layoutInflater = getLayoutInflater();
         recyclerView = (RecyclerView)findViewById(R.id.rec_list);
@@ -59,11 +57,6 @@ public class Listactivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        DbGuardian.init(getApplicationContext());
-        db = DbGuardian.subjectdb;
-        dao = db.ListItemSubjDao();
-        repository = new SubjectRepository(dao);
-        vFactory = new CustomViewModelFactory(repository);
         vFactory.create(ListItemViewModel.class).getListData().observe(this, new Observer<List<ListItemSubj>>() {
                     @Override
                     public void onChanged(@Nullable List<ListItemSubj> listItemSubjs) {

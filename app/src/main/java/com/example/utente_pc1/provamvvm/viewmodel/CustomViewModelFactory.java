@@ -6,11 +6,14 @@ import android.support.annotation.NonNull;
 
 import com.example.utente_pc1.provamvvm.model.repository.SubjectRepository;
 
+import javax.inject.Inject;
+
 
 public class CustomViewModelFactory implements ViewModelProvider.Factory {
 
     private SubjectRepository subjectRepository;
 
+    @Inject
     public CustomViewModelFactory(SubjectRepository subjectRepository) {
         this.subjectRepository = subjectRepository;
     }

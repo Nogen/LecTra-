@@ -15,22 +15,19 @@ import android.widget.Toast;
 
 import com.example.utente_pc1.provamvvm.R;
 import com.example.utente_pc1.provamvvm.model.data.ListItemSubj;
-import com.example.utente_pc1.provamvvm.model.data.ListItemSubjDao;
-import com.example.utente_pc1.provamvvm.model.data.Subjectdb;
-import com.example.utente_pc1.provamvvm.model.repository.SubjectRepository;
 import com.example.utente_pc1.provamvvm.ui.list.Listactivity;
-import com.example.utente_pc1.provamvvm.util.DbGuardian;
 import com.example.utente_pc1.provamvvm.viewmodel.CreateItemViewModel;
 import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;
+import com.example.utente_pc1.provamvvm.LecApplication;
 
 import java.text.SimpleDateFormat;
 
+import javax.inject.Inject;
+
 
 public class CreateActivity extends AppCompatActivity {
-    private Subjectdb db;
-    private ListItemSubjDao dao;
-    private SubjectRepository repository;
-    private CustomViewModelFactory wFactory;
+    @Inject
+    CustomViewModelFactory wFactory;
     private CalendarView calendarView;
     private Spinner spinner;
     private EditText hours;
@@ -42,6 +39,8 @@ public class CreateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
+
+        ((LecApplication) getApplication()).getLecComponent().inject(this);
 
         calendarView = (CalendarView)findViewById(R.id.cal_date);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -64,10 +63,6 @@ public class CreateActivity extends AppCompatActivity {
 
         addbtn = (Button) findViewById(R.id.btncr);
 
-        db = DbGuardian.subjectdb;
-        dao = db.ListItemSubjDao();
-        repository = new SubjectRepository(dao);
-        wFactory = new CustomViewModelFactory(repository);
 
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
