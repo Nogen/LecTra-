@@ -1,7 +1,5 @@
 package com.example.utente_pc1.provamvvm.ui.detail;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,22 +7,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.example.utente_pc1.provamvvm.LecApplication;
 import com.example.utente_pc1.provamvvm.R;
-import com.example.utente_pc1.provamvvm.model.data.ListItemSubj;
 import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;
 import com.example.utente_pc1.provamvvm.viewmodel.DetailItemViewModel;
 
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.inject.Inject;
 
@@ -33,7 +26,9 @@ public class DetailActivity extends AppCompatActivity {
 
     private LayoutInflater layoutInflater;
     private RecyclerView recyclerView;
-    private TextView textView;
+    private TextView texthours;
+    private TextView textname;
+
 
     @Inject
     CustomViewModelFactory vFactory;
@@ -56,18 +51,21 @@ public class DetailActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rec_dates);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        textView = (TextView) findViewById(R.id.txtdt_totalhours);
+        texthours = (TextView) findViewById(R.id.txtdt_totalhours);
+
+        textname = (TextView) findViewById(R.id.txtdt_name);
 
         detailItemViewModel = vFactory.create(DetailItemViewModel.class);
 
         Intent i = getIntent();
         name = i.getExtras().getString(NAME_DETAIL);
+        textname.setText(name);
 
         detailItemViewModel.getTotalHour(name).observe(this, new android.arch.lifecycle.Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer integer) {
                 if (integer != null) {
-                    textView.setText(String.valueOf(integer));
+                    texthours.setText(String.valueOf(integer));
                 }
             }
         });
