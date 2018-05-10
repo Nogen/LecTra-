@@ -59,6 +59,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         name = i.getExtras().getString(NAME_DETAIL);
+
         textname.setText(name);
 
         detailItemViewModel.getTotalHour(name).observe(this, new android.arch.lifecycle.Observer<Integer>() {

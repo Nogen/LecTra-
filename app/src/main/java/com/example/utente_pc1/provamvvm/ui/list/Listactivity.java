@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.utente_pc1.provamvvm.R;
@@ -49,13 +50,15 @@ public class Listactivity extends AppCompatActivity {
 
         layoutInflater = getLayoutInflater();
         recyclerView = (RecyclerView)findViewById(R.id.rec_list);
-        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab_create_new_item);
+
+        Button fab = (Button) findViewById(R.id.fab_create_new_item);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startCreateActivity();
             }
         });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
