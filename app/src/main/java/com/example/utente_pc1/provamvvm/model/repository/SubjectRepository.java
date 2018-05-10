@@ -35,7 +35,7 @@ public class SubjectRepository {
     }
 
     public LiveData<List<String>> getDates(String name) {
-        return this.getDates(name);
+        return this.listItemSubjDao.getDates(name);
     }
 
     public void InsertSubj(ListItemSubj listItemSubj) {

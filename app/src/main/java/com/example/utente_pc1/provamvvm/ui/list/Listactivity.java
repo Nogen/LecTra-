@@ -30,6 +30,8 @@ import javax.inject.Inject;
 
 public class Listactivity extends AppCompatActivity {
 
+    private final static String NAME_DETAIL = "NAME_DETAIL";
+
     @Inject
     CustomViewModelFactory vFactory;
     List<ListItemSubj> listOfData;
@@ -68,8 +70,10 @@ public class Listactivity extends AppCompatActivity {
     }
 
 
-    public void startDetailActivity() {
-        startActivity(new Intent(this, DetailActivity.class));
+    public void startDetailActivity(String name) {
+        Intent i = new Intent(this, DetailActivity.class);
+        i.putExtra(NAME_DETAIL, name);
+        startActivity(i);
     }
 
     public void startCreateActivity() {
@@ -126,7 +130,7 @@ public class Listactivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ListItemSubj item = listOfData.get(this.getAdapterPosition());
-                startDetailActivity();
+                startDetailActivity(item.getName());
 
             }
         }

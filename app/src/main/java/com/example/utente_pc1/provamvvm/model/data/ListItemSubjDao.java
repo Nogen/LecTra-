@@ -26,7 +26,7 @@ public interface ListItemSubjDao {
     public LiveData<Integer> getTotalHours(String name);
 
     @Query("SELECT date FROM listitemsubj WHERE name = :name")
-    public LiveData<String> getDates(String name);
+    public LiveData<List<String>> getDates(String name);
 
     @Delete
     public void deleteListItemSubj(ListItemSubj listItemSubj);
