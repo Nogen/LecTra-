@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,10 +39,12 @@ public class Listactivity extends AppCompatActivity {
     List<ListItemSubj> listOfData;
     private LayoutInflater layoutInflater;
     private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listactivity);
 
@@ -59,7 +62,8 @@ public class Listactivity extends AppCompatActivity {
             }
         });
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
 
         vFactory.create(ListItemViewModel.class).getListData().observe(this, new Observer<List<ListItemSubj>>() {
@@ -82,12 +86,16 @@ public class Listactivity extends AppCompatActivity {
     public void startCreateActivity() {
         startActivity(new Intent(this, CreateActivity.class));
         finish();
+
     }
 
 
     public void setData(List<ListItemSubj> listOfData) {
         this.listOfData = listOfData;
         recyclerView.setAdapter(new CustomAdapter());
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                layoutManager.getOrientation());
+        recyclerView.addItemDecoration(itemDecoration);
     }
 
     class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {

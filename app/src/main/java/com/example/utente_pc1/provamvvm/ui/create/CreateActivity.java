@@ -2,6 +2,7 @@ package com.example.utente_pc1.provamvvm.ui.create;
 
 
 import android.content.Intent;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -33,14 +35,32 @@ public class CreateActivity extends AppCompatActivity {
     private EditText hours;
     private Button addbtn;
     private String curdate;
+    private ImageButton imageButton;
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startListActivity();
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_create);
 
         ((LecApplication) getApplication()).getLecComponent().inject(this);
+
+        imageButton = (ImageButton) findViewById(R.id.btncr_backtomain);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startListActivity();
+                finish();
+            }
+        });
 
         calendarView = (CalendarView)findViewById(R.id.cal_date);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {

@@ -1,15 +1,18 @@
 package com.example.utente_pc1.provamvvm.ui.detail;
 
 import android.content.Intent;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.utente_pc1.provamvvm.LecApplication;
@@ -25,22 +28,22 @@ public class DetailActivity extends AppCompatActivity {
     private final static String NAME_DETAIL = "NAME_DETAIL";
 
     private LayoutInflater layoutInflater;
+    private LinearLayoutManager layoutManager;
     private RecyclerView recyclerView;
     private TextView texthours;
-    private TextView textname;
+    private ImageButton imageButton;
 
 
     @Inject
     CustomViewModelFactory vFactory;
 
-    private DetailItemViewModel detailItemViewModel;
-    private String name;
     private List<String> datelist;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_detail);
         ((LecApplication) getApplication())
                 .getLecComponent()
@@ -49,16 +52,25 @@ public class DetailActivity extends AppCompatActivity {
         layoutInflater = getLayoutInflater();
 
         recyclerView = (RecyclerView) findViewById(R.id.rec_dates);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        imageButton = (ImageButton) findViewById(R.id.btndt_backtomain);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         texthours = (TextView) findViewById(R.id.txtdt_totalhours);
 
-        textname = (TextView) findViewById(R.id.txtdt_name);
+        TextView textname = (TextView) findViewById(R.id.txtdt_name);
 
-        detailItemViewModel = vFactory.create(DetailItemViewModel.class);
+        DetailItemViewModel detailItemViewModel = vFactory.create(DetailItemViewModel.class);
 
         Intent i = getIntent();
-        name = i.getExtras().getString(NAME_DETAIL);
+        String name = i.getExtras().getString(NAME_DETAIL);
 
         textname.setText(name);
 
@@ -87,6 +99,10 @@ public class DetailActivity extends AppCompatActivity {
     private void setData(List<String> datelist) {
         this.datelist = datelist;
         recyclerView.setAdapter(new CustomAdapter());
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                layoutManager.getOrientation());
+
+        recyclerView.addItemDecoration(itemDecoration);
     }
 
 
