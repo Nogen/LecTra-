@@ -9,24 +9,12 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tlb_list_activity"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="0dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <View
-        android:id="@+id/toolbar_shadow"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="@drawable/toolbar_dropshadow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tlb_list_activity" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
     <android.support.v7.widget.RecyclerView
@@ -120,6 +108,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/lectra"
+        android:elevation="4dp"
         android:textColor="@color/textOnDark"
         android:textSize="20sp"
         android:textStyle="bold"
