@@ -40,7 +40,6 @@ public class CreateActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         startListActivity();
         finish();
     }

@@ -106,16 +106,14 @@
     <ImageButton
         android:id="@+id/btncr_backtomain"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_height="?attr/actionBarSize"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:background="?android:selectableItemBackground"
         android:contentDescription="@string/todo"
-        android:src="@drawable/baseline_arrow_white_18dp"
         android:elevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/tlb_activity_create"
+        android:src="@drawable/baseline_arrow_white_18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tlb_activity_create"
         app:layout_constraintStart_toStartOf="@+id/tlb_activity_create"
         app:layout_constraintTop_toTopOf="@+id/tlb_activity_create" />
 
