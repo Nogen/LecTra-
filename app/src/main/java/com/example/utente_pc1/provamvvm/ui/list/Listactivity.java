@@ -1,16 +1,21 @@
 package com.example.utente_pc1.provamvvm.ui.list;
 
 
+import android.app.ActivityOptions;
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
+
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +34,8 @@ import com.example.utente_pc1.provamvvm.viewmodel.ListItemViewModel;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import static android.support.transition.Fade.*;
 
 public class Listactivity extends AppCompatActivity {
 
@@ -77,15 +84,41 @@ public class Listactivity extends AppCompatActivity {
     }
 
 
-    public void startDetailActivity(String name) {
+    public void startDetailActivity(String name, View view) {
         Intent i = new Intent(this, DetailActivity.class);
         i.putExtra(NAME_DETAIL, name);
-        startActivity(i);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setEnterTransition(new Fade(Fade.IN));
+            getWindow().setExitTransition(new Fade(Fade.OUT));
+
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                    view.findViewById(R.id.txtv_name), getString(R.string.transition_name)
+            );
+            startActivity(i, options.toBundle());
+
+        } else {
+            startActivity(i);
+        }
     }
 
     public void startCreateActivity() {
-        startActivity(new Intent(this, CreateActivity.class));
-        finish();
+        Intent i = new Intent(this, CreateActivity.class);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setEnterTransition(new Fade(Fade.IN));
+            getWindow().setExitTransition(new Fade(Fade.OUT));
+
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                    findViewById(R.id.fab_create_new_item), getString(R.string.transition_button)
+            );
+            startActivity(i, options.toBundle());
+            //finishAfterTransition();
+        } else {
+            startActivity(i);
+            //finish();
+        }
+
 
     }
 
@@ -141,7 +174,7 @@ public class Listactivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ListItemSubj item = listOfData.get(this.getAdapterPosition());
-                startDetailActivity(item.getName());
+                startDetailActivity(item.getName(), v);
 
             }
         }

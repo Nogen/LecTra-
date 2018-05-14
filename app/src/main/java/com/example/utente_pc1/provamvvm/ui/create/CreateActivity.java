@@ -3,6 +3,7 @@ package com.example.utente_pc1.provamvvm.ui.create;
 
 import android.content.Intent;
 import android.media.Image;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,8 +41,15 @@ public class CreateActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startListActivity();
-        finish();
+        finished();
+    }
+
+    private void finished() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            finishAfterTransition();
+        } else {
+            finish();
+        }
     }
 
     @Override
@@ -56,8 +64,7 @@ public class CreateActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startListActivity();
-                finish();
+                finished();
             }
         });
 

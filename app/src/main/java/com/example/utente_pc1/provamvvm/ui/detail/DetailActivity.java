@@ -1,7 +1,7 @@
 package com.example.utente_pc1.provamvvm.ui.detail;
 
 import android.content.Intent;
-import android.media.Image;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -59,13 +59,18 @@ public class DetailActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    finishAfterTransition();
+                } else {
+                    finish();
+                }
+
             }
         });
 
         texthours = (TextView) findViewById(R.id.txtdt_totalhours);
 
-        TextView textname = (TextView) findViewById(R.id.txtdt_name);
+        TextView textname = (TextView) findViewById(R.id.txtv_name);
 
         DetailItemViewModel detailItemViewModel = vFactory.create(DetailItemViewModel.class);
 
