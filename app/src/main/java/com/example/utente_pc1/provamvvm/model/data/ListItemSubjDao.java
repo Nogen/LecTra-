@@ -13,7 +13,7 @@ import java.util.List;
 @Dao
 public interface ListItemSubjDao {
 
-    @Query("SELECT * FROM listitemsubj")
+    @Query("SELECT * FROM listitemsubj ORDER BY date DESC")
     public LiveData<List<ListItemSubj>> getItemCollection();
 
     @Query("SELECT * FROM listitemsubj WHERE name = :name")
