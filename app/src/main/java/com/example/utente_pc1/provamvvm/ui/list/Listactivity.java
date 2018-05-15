@@ -107,19 +107,15 @@ public class Listactivity extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setEnterTransition(new Fade(Fade.IN));
-            getWindow().setExitTransition(new Fade(Fade.OUT));
 
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
                     findViewById(R.id.fab_create_new_item), getString(R.string.transition_button)
             );
             startActivity(i, options.toBundle());
-            //finishAfterTransition();
         } else {
             startActivity(i);
-            //finish();
         }
-
-
+        finish();
     }
 
 
