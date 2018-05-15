@@ -15,6 +15,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,7 @@ public class Listactivity extends AppCompatActivity {
     private LayoutInflater layoutInflater;
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
+    private CustomAdapter customAdapter;
 
 
     @Override
@@ -120,10 +122,14 @@ public class Listactivity extends AppCompatActivity {
 
     public void setData(List<ListItemSubj> listOfData) {
         this.listOfData = listOfData;
-        recyclerView.setAdapter(new CustomAdapter());
+        customAdapter = new CustomAdapter();
+        recyclerView.setAdapter(customAdapter);
         DividerItemDecoration itemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 layoutManager.getOrientation());
         recyclerView.addItemDecoration(itemDecoration);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(getDeleteCallback());
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
     }
 
     class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
@@ -173,6 +179,28 @@ public class Listactivity extends AppCompatActivity {
 
             }
         }
+    }
+
+
+    private ItemTouchHelper.Callback getDeleteCallback() {
+        ItemTouchHelper.SimpleCallback itemThelper = new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                                  RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int pos = viewHolder.getAdapterPosition();
+                vFactory.create(ListItemViewModel.class).deleteItem(listOfData.get(pos));
+                listOfData.remove(pos);
+                customAdapter.notifyItemRemoved(pos);
+            }
+        };
+        return itemThelper;
     }
 
 
