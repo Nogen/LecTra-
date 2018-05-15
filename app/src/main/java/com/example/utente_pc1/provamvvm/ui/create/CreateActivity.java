@@ -44,7 +44,7 @@ public class CreateActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startListActivity();
+        finished();
     }
 
     private void finished() {
@@ -67,7 +67,7 @@ public class CreateActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startListActivity();
+                finished();
             }
         });
 
@@ -114,19 +114,8 @@ public class CreateActivity extends AppCompatActivity {
 
     public void startListActivity() {
         Intent i = new Intent(this, Listactivity.class);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setEnterTransition(new Fade(Fade.OUT));
-
-            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
-                    findViewById(R.id.root_activity_create), getString(R.string.transition_button)
-            );
-            startActivity(i, options.toBundle());
-
-        } else {
-            startActivity(i);
-
-        }
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
         finished();
     }
 }

@@ -115,7 +115,6 @@ public class Listactivity extends AppCompatActivity {
         } else {
             startActivity(i);
         }
-        finish();
     }
 
 
