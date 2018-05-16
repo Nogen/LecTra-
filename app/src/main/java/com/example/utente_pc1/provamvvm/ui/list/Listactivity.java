@@ -8,6 +8,8 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import android.support.design.widget.BaseTransientBottomBar;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.support.v7.widget.RecyclerView;
 
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.transition.Fade;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -194,10 +197,32 @@ public class Listactivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int pos = viewHolder.getAdapterPosition();
-                vFactory.create(ListItemViewModel.class).deleteItem(listOfData.get(pos));
+                final int pos = viewHolder.getAdapterPosition();
+                final ListItemSubj tmp = listOfData.get(pos);
                 listOfData.remove(pos);
                 customAdapter.notifyItemRemoved(pos);
+                Snackbar.make(findViewById(R.id.root_list_item), R.string.delete_item, Snackbar.LENGTH_SHORT)
+                        .setAction(R.string.undo, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                listOfData.add(pos, tmp);
+                                customAdapter.notifyItemInserted(pos);
+                            }
+
+                        })
+                        .addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                            @Override
+                            public void onDismissed(Snackbar transientBottomBar, int event) {
+                                super.onDismissed(transientBottomBar, event);
+                                if (event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT ||
+                                        event == Snackbar.Callback.DISMISS_EVENT_CONSECUTIVE) {
+                                    Log.e("VEDIAMO", "questo non dovrebbe essere eseguito");
+                                    vFactory.create(ListItemViewModel.class).deleteItem(tmp);
+                                }
+                            }
+                        })
+                        .show();
+
             }
         };
         return itemThelper;
