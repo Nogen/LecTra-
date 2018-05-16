@@ -14,32 +14,35 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        tools:targetApi="lollipop" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
     <View
+        android:id="@+id/rect_background"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tlb_activity_detail" />
+
+    <View
         android:id="@+id/divider4"
-        android:layout_width="368dp"
+        android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtv_name" />
+        app:layout_constraintTop_toBottomOf="@+id/rect_background" />
 
     <TextView
         android:id="@+id/txtdt_totalhours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:text=""
@@ -108,13 +111,17 @@
         android:id="@+id/txtv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/textview"
+        android:textColor="@color/textOnDark"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:transitionName="@string/transition_name"
+        app:layout_constraintBottom_toBottomOf="@id/rect_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tlb_activity_detail" />
@@ -141,7 +148,7 @@
         android:background="?android:selectableItemBackground"
         android:elevation="4dp"
         android:src="@drawable/baseline_arrow_white_18dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtv_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tlb_activity_detail"
         app:layout_constraintStart_toStartOf="@+id/tlb_activity_detail"
         app:layout_constraintTop_toTopOf="@+id/tlb_activity_detail"
         android:contentDescription="TODO" />
