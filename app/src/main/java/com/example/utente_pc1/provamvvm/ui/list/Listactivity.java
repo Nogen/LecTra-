@@ -1,7 +1,6 @@
 package com.example.utente_pc1.provamvvm.ui.list;
 
 
-import android.app.ActivityOptions;
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Build;
@@ -38,8 +37,6 @@ import com.example.utente_pc1.provamvvm.viewmodel.ListItemViewModel;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import static android.support.transition.Fade.*;
 
 public class Listactivity extends AppCompatActivity {
 
@@ -174,6 +171,7 @@ public class Listactivity extends AppCompatActivity {
                 this.container = (ViewGroup) itemView.findViewById(R.id.root_list_item);
                 this.container.setOnClickListener(this);
 
+
             }
             @Override
             public void onClick(View v) {
@@ -214,9 +212,7 @@ public class Listactivity extends AppCompatActivity {
                             @Override
                             public void onDismissed(Snackbar transientBottomBar, int event) {
                                 super.onDismissed(transientBottomBar, event);
-                                if (event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT ||
-                                        event == Snackbar.Callback.DISMISS_EVENT_CONSECUTIVE) {
-                                    Log.e("VEDIAMO", "questo non dovrebbe essere eseguito");
+                                if (event != Snackbar.Callback.DISMISS_EVENT_ACTION) {
                                     vFactory.create(ListItemViewModel.class).deleteItem(tmp);
                                 }
                             }
