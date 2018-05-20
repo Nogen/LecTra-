@@ -14,6 +14,7 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:titleTextColor="@color/textOnDark"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
@@ -100,22 +101,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/lectra"
-        android:elevation="4dp"
-        android:textColor="@color/textOnDark"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/tlb_list_activity"
-        app:layout_constraintStart_toStartOf="@+id/tlb_list_activity"
-        app:layout_constraintTop_toTopOf="@+id/tlb_list_activity" />
 
 
 </android.support.constraint.ConstraintLayout>

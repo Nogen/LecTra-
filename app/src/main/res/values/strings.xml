@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Lectra</string>
+    <string name="detail">Details</string>
+    <string name="add_item">Add Item</string>
+    <string name="list">Subjects List</string>
     <string name="delete_item">1 item is deleted</string>
     <string name="undo">Undo?</string>
     <string name="transition_name">transition_name</string>

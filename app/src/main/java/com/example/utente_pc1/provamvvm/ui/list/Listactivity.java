@@ -18,12 +18,12 @@ import android.support.v7.widget.RecyclerView;
 
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.transition.Fade;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import com.example.utente_pc1.provamvvm.R;
 import com.example.utente_pc1.provamvvm.LecApplication;
@@ -61,6 +61,12 @@ public class Listactivity extends AppCompatActivity {
         ((LecApplication) getApplication()).getLecComponent().inject(this);
 
         layoutInflater = getLayoutInflater();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tlb_list_activity);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.list_of_lessons);
+
+
         recyclerView = (RecyclerView)findViewById(R.id.rec_list);
 
         Button fab = (Button) findViewById(R.id.fab_create_new_item);

@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.transition.Fade;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -63,13 +64,12 @@ public class CreateActivity extends AppCompatActivity {
 
         ((LecApplication) getApplication()).getLecComponent().inject(this);
 
-        imageButton = (ImageButton) findViewById(R.id.btncr_backtomain);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finished();
-            }
-        });
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tlb_activity_create);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(R.string.add_item);
 
         calendarView = (CalendarView)findViewById(R.id.cal_date);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -110,6 +110,12 @@ public class CreateActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     public void startListActivity() {
