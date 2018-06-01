@@ -99,6 +99,7 @@ public class CreateActivity extends AppCompatActivity {
                     tmp.setHours(Integer.valueOf(hours.getText().toString()));
                     tmp.setDate((curdate != null) ? curdate : defdate);
                     tmp.setName(spinner.getSelectedItem().toString());
+                    tmp.setInserttime(conv.parse(curdate).getTime());
                     wFactory.create(CreateItemViewModel.class).insertSubj(tmp);
                     startListActivity();
                 } catch (Exception e) {

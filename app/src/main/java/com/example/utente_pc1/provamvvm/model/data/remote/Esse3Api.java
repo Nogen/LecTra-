@@ -1,5 +1,8 @@
 package com.example.utente_pc1.provamvvm.model.data.remote;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+
 import com.example.utente_pc1.provamvvm.model.data.local.GroupSubj;
 import com.example.utente_pc1.provamvvm.model.data.local.SingleSubj;
 import com.example.utente_pc1.provamvvm.util.exceptions.ConnectionException;
@@ -135,7 +138,8 @@ public class Esse3Api {
     }
 
 
-    public List<GroupSubj> getBlocks() throws ConnectionException, LoginException {
+    public LiveData<List<GroupSubj>> getBlocks() throws ConnectionException, LoginException {
+        MutableLiveData<List<GroupSubj>> listLiveData = new MutableLiveData<List<GroupSubj>>();
         List<GroupSubj> blocks = new ArrayList<>();
 
         List<String> blockname = this.getSubjects();
@@ -144,10 +148,12 @@ public class Esse3Api {
             Float hours = this.getTotalBlockHours(sub);
             blocks.add(new GroupSubj(sub, hours));
         }
-        return blocks;
+        listLiveData.setValue(blocks);
+        return listLiveData;
     }
 
-    public List<SingleSubj> getSubjs() throws ConnectionException, LoginException {
+    public LiveData<List<SingleSubj>> getSubjs() throws ConnectionException, LoginException {
+        MutableLiveData<List<SingleSubj>> listLiveData = new MutableLiveData<List<SingleSubj>>();
         List<SingleSubj> subjects = new ArrayList<>();
         HashMap<String, Float> tmpsubj;
 
@@ -159,6 +165,7 @@ public class Esse3Api {
                 subjects.add(new SingleSubj(subjName, sub, tmpsubj.get(subjName)));
             }
         }
-        return subjects;
+        listLiveData.setValue(subjects);
+        return listLiveData;
     }
 }

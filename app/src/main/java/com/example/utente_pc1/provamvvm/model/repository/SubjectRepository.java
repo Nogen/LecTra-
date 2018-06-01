@@ -6,6 +6,7 @@ import com.example.utente_pc1.provamvvm.model.data.local.GroupSubj;
 import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubj;
 import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubjDao;
 import com.example.utente_pc1.provamvvm.model.data.local.SingleSubj;
+import com.example.utente_pc1.provamvvm.model.data.remote.Esse3Api;
 
 import java.util.List;
 
@@ -13,10 +14,12 @@ import javax.inject.Inject;
 
 public class SubjectRepository {
     private ListItemSubjDao listItemSubjDao;
+    private Esse3Api esse3Api;
 
     @Inject
-    public SubjectRepository(ListItemSubjDao listItemSubjDao){
+    public SubjectRepository(ListItemSubjDao listItemSubjDao, Esse3Api api) {
         this.listItemSubjDao = listItemSubjDao;
+        this.esse3Api = api;
     }
 
 
