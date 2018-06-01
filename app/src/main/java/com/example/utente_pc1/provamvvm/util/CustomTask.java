@@ -2,11 +2,7 @@ package com.example.utente_pc1.provamvvm.util;
 
 import android.os.AsyncTask;
 
-import com.example.utente_pc1.provamvvm.model.data.ListItemSubj;
-
-
-import java.lang.reflect.Method;
-import java.util.concurrent.Callable;
+import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubj;
 
 public class CustomTask extends AsyncTask<ListItemSubj, Void, Void> {
     private Runnable r;

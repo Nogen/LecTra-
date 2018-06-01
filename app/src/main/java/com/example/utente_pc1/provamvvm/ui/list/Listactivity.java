@@ -27,7 +27,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.utente_pc1.provamvvm.R;
 import com.example.utente_pc1.provamvvm.LecApplication;
-import com.example.utente_pc1.provamvvm.model.data.ListItemSubj;
+import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubj;
 import com.example.utente_pc1.provamvvm.ui.create.CreateActivity;
 import com.example.utente_pc1.provamvvm.ui.detail.DetailActivity;
 import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;

@@ -2,8 +2,8 @@ package com.example.utente_pc1.provamvvm.model.repository;
 
 import android.arch.lifecycle.LiveData;
 
-import com.example.utente_pc1.provamvvm.model.data.ListItemSubj;
-import com.example.utente_pc1.provamvvm.model.data.ListItemSubjDao;
+import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubj;
+import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubjDao;
 
 import java.util.List;
 

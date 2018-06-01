@@ -3,8 +3,8 @@ package com.example.utente_pc1.provamvvm.dependency;
 import android.app.Application;
 import android.arch.persistence.room.Room;
 
-import com.example.utente_pc1.provamvvm.model.data.ListItemSubjDao;
-import com.example.utente_pc1.provamvvm.model.data.Subjectdb;
+import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubjDao;
+import com.example.utente_pc1.provamvvm.model.data.local.Subjectdb;
 import com.example.utente_pc1.provamvvm.model.repository.SubjectRepository;
 import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;
 

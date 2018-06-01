@@ -1,16 +1,12 @@
 package com.example.utente_pc1.provamvvm.ui.create;
 
 
-import android.app.ListActivity;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.transition.Fade;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,7 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.utente_pc1.provamvvm.R;
-import com.example.utente_pc1.provamvvm.model.data.ListItemSubj;
+import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubj;
 import com.example.utente_pc1.provamvvm.ui.list.Listactivity;
 import com.example.utente_pc1.provamvvm.viewmodel.CreateItemViewModel;
 import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;
