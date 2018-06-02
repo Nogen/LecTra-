@@ -7,6 +7,8 @@ import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubj;
 import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubjDao;
 import com.example.utente_pc1.provamvvm.model.data.local.SingleSubj;
 import com.example.utente_pc1.provamvvm.model.data.remote.Esse3Api;
+import com.example.utente_pc1.provamvvm.util.exceptions.ConnectionException;
+import com.example.utente_pc1.provamvvm.util.exceptions.LoginException;
 
 import java.util.List;
 
@@ -83,4 +85,15 @@ public class SubjectRepository {
         this.listItemSubjDao.insertGroupSubj(groupSubj);
     }
 
+    public void Login(String name, String password) throws ConnectionException, LoginException {
+        this.esse3Api.Login(name, password);
+    }
+
+    public LiveData<List<SingleSubj>> getNetSingleSubj() throws ConnectionException, LoginException {
+        return this.esse3Api.getSubjs();
+    }
+
+    public LiveData<List<GroupSubj>> getNetGroups() throws ConnectionException, LoginException {
+        return this.esse3Api.getBlocks();
+    }
 }
