@@ -72,4 +72,5 @@
         <item>PSICHIATRIA</item>
         <item>INFERMIERISTICA NELLA DISABILITÀ</item>
     </string-array>
+    <string name="title_activity_loading_activity">LoadingActivity</string>
 </resources>

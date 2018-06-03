@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import android.util.Base64;
+import android.util.Log;
 
 
 public class DomRequester {
@@ -19,7 +20,7 @@ public class DomRequester {
     private static final String BASIC = "Basic ";
 
     private String base64Auth;
-    private String cookie = null;
+    private String cookie = new String("");
     private URL url = null;
     private HttpURLConnection connection;
     private ConnectionException error = new ConnectionException("Internet connection missing!");
@@ -60,8 +61,11 @@ public class DomRequester {
             connection.setRequestProperty(AUTH, BASIC + base64Auth);
             String tmpcookie = connection.getHeaderField(SET_COOKIE);
             this.cookie = (tmpcookie != null) ? tmpcookie : this.cookie;
+
         } catch (IOException e) {
             throw error;
+        } catch (Exception e1) {
+
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -89,7 +93,6 @@ public class DomRequester {
             return dom;
 
         } catch (IOException e) {
-            e.printStackTrace();
             throw error;
         } finally {
             if (connection != null) {

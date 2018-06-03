@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.utente_pc1.provamvvm">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".LecApplication"
         android:allowBackup="true"
@@ -10,15 +12,25 @@
         android:roundIcon="@mipmap/pill_round"
         android:supportsRtl="true"
         android:theme="@style/SplashTheme">
-        <activity android:name=".ui.list.Listactivity">
+        <activity
+            android:name=".ui.loading.LoadingActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.create.CreateActivity" />
-        <activity android:name=".ui.detail.DetailActivity"></activity>
+        <activity
+            android:name=".ui.list.Listactivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.create.CreateActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.detail.DetailActivity"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>

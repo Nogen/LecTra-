@@ -116,7 +116,9 @@ public class Esse3Api {
         for (Element e : elements) {
             counter = counter % div;
             if (counter == 0) {
-                key = e.text();
+                key = e.text()
+                        .split("-")[0]
+                        .trim();
             } else if (counter == div - 1) {
                 value = Float.valueOf(e.
                         text()
@@ -152,8 +154,8 @@ public class Esse3Api {
         return listLiveData;
     }
 
-    public LiveData<List<SingleSubj>> getSubjs() throws ConnectionException, LoginException {
-        MutableLiveData<List<SingleSubj>> listLiveData = new MutableLiveData<List<SingleSubj>>();
+    public List<SingleSubj> getSubjs() throws ConnectionException, LoginException {
+
         List<SingleSubj> subjects = new ArrayList<>();
         HashMap<String, Float> tmpsubj;
 
@@ -165,7 +167,6 @@ public class Esse3Api {
                 subjects.add(new SingleSubj(subjName, sub, tmpsubj.get(subjName)));
             }
         }
-        listLiveData.setValue(subjects);
-        return listLiveData;
+        return subjects;
     }
 }

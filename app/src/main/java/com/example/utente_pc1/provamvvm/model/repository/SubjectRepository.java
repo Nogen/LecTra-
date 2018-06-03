@@ -89,11 +89,15 @@ public class SubjectRepository {
         this.esse3Api.Login(name, password);
     }
 
-    public LiveData<List<SingleSubj>> getNetSingleSubj() throws ConnectionException, LoginException {
+    public List<SingleSubj> getNetSingleSubj() throws ConnectionException, LoginException {
         return this.esse3Api.getSubjs();
     }
 
     public LiveData<List<GroupSubj>> getNetGroups() throws ConnectionException, LoginException {
         return this.esse3Api.getBlocks();
+    }
+
+    public void deleteAllsubj() {
+        this.listItemSubjDao.deleteAllsubj();
     }
 }

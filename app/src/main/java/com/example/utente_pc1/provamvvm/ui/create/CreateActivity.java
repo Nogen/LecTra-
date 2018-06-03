@@ -1,29 +1,34 @@
 package com.example.utente_pc1.provamvvm.ui.create;
 
 
+import android.arch.lifecycle.Observer;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.utente_pc1.provamvvm.R;
 import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubj;
+import com.example.utente_pc1.provamvvm.model.data.local.SingleSubj;
 import com.example.utente_pc1.provamvvm.ui.list.Listactivity;
 import com.example.utente_pc1.provamvvm.viewmodel.CreateItemViewModel;
 import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;
 import com.example.utente_pc1.provamvvm.LecApplication;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -31,12 +36,13 @@ import javax.inject.Inject;
 public class CreateActivity extends AppCompatActivity {
     @Inject
     CustomViewModelFactory wFactory;
+    private Context context;
     private CalendarView calendarView;
     private Spinner spinner;
     private EditText hours;
     private Button addbtn;
     private String curdate;
-    private ImageButton imageButton;
+    private ArrayAdapter<String> adapter;
 
 
     @Override
@@ -57,9 +63,22 @@ public class CreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_create);
+        context = this;
 
         ((LecApplication) getApplication()).getLecComponent().inject(this);
 
+
+        wFactory.create(CreateItemViewModel.class).getSingleSubj().observe(this, new Observer<List<SingleSubj>>() {
+            @Override
+            public void onChanged(@Nullable List<SingleSubj> singleSubjs) {
+                adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item);
+                for (SingleSubj s : singleSubjs) {
+                    adapter.add(s.getSubjName());
+                }
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter);
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tlb_activity_create);
         setSupportActionBar(toolbar);
@@ -78,11 +97,9 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
+
         spinner = (Spinner)findViewById(R.id.spin_subj);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.subjs_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+
 
         hours = (EditText)findViewById(R.id.txtcr_hours);
 
@@ -95,14 +112,18 @@ public class CreateActivity extends AppCompatActivity {
                 SimpleDateFormat conv = new SimpleDateFormat("dd/MM/yyyy");
                 String defdate = conv.format(calendarView.getDate());
                 ListItemSubj tmp = new ListItemSubj();
+                if (curdate == null) {
+                    curdate = defdate;
+                }
                 try {
                     tmp.setHours(Integer.valueOf(hours.getText().toString()));
-                    tmp.setDate((curdate != null) ? curdate : defdate);
+                    tmp.setDate(curdate);
                     tmp.setName(spinner.getSelectedItem().toString());
                     tmp.setInserttime(conv.parse(curdate).getTime());
                     wFactory.create(CreateItemViewModel.class).insertSubj(tmp);
                     startListActivity();
                 } catch (Exception e) {
+
                     Toast.makeText(getApplicationContext(), "You have to select all info!", Toast.LENGTH_LONG).show();
                 }
             }

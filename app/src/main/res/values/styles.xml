@@ -1,9 +1,11 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowActivityTransitions" tools:targetApi="lollipop" tools:ignore="NewApi">
+            true
+        </item>
 
         <item name="android:homeAsUpIndicator">@drawable/baseline_arrow_white_18dp</item>
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -14,5 +16,9 @@
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splashscreen</item>
     </style>
+
+    <style name="SplashTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="SplashTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

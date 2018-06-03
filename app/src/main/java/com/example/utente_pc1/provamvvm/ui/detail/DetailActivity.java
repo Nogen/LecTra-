@@ -11,12 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
 import com.example.utente_pc1.provamvvm.LecApplication;
 import com.example.utente_pc1.provamvvm.R;
+import com.example.utente_pc1.provamvvm.util.task.CustomTask;
 import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;
 import com.example.utente_pc1.provamvvm.viewmodel.DetailItemViewModel;
 
@@ -31,7 +31,6 @@ public class DetailActivity extends AppCompatActivity {
     private LinearLayoutManager layoutManager;
     private RecyclerView recyclerView;
     private TextView texthours;
-    private ImageButton imageButton;
 
 
     @Inject
@@ -101,13 +100,20 @@ public class DetailActivity extends AppCompatActivity {
         return true;
     }
 
-    private void setData(List<String> datelist) {
-        this.datelist = datelist;
+    private void setData(final List<String> datelistpassed) {
         recyclerView.setAdapter(new CustomAdapter());
         DividerItemDecoration itemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 layoutManager.getOrientation());
 
         recyclerView.addItemDecoration(itemDecoration);
+
+        CustomTask datatask = new CustomTask(new Runnable() {
+            @Override
+            public void run() {
+                datelist = datelistpassed;
+            }
+        });
+        datatask.execute();
     }
 
 
