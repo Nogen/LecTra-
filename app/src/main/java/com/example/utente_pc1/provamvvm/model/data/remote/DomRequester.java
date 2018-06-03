@@ -58,6 +58,7 @@ public class DomRequester {
         }
         try {
             connection = (HttpURLConnection) this.url.openConnection();
+            connection.setConnectTimeout(1000);
             connection.setRequestProperty(AUTH, BASIC + base64Auth);
             String tmpcookie = connection.getHeaderField(SET_COOKIE);
             this.cookie = (tmpcookie != null) ? tmpcookie : this.cookie;
@@ -80,6 +81,7 @@ public class DomRequester {
         String line;
         try {
             connection = (HttpURLConnection) this.url.openConnection();
+            connection.setConnectTimeout(1000);
             connection.setRequestProperty(AUTH, BASIC + base64Auth);
             connection.setRequestProperty(COOKIE, this.cookie);
             if (connection.getResponseCode() == 401) {
