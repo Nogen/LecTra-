@@ -1,5 +1,6 @@
 package com.example.utente_pc1.provamvvm.ui.loading;
 
+import android.app.ProgressDialog;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 
 import com.example.utente_pc1.provamvvm.LecApplication;
@@ -24,6 +26,7 @@ public class LoadingActivity extends AppCompatActivity {
     @Inject
     CustomViewModelFactory wFactory;
     private Context context;
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -35,20 +38,27 @@ public class LoadingActivity extends AppCompatActivity {
                 .getLecComponent()
                 .inject(this);
 
-
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Login");
+        progressDialog.show();
         context = this;
         String name = "i.napoli2";
         String password = "H*97!79*2a";
+
+        long time = System.nanoTime();
         wFactory.create(ListItemViewModel.class).deleteAllsubj();
         wFactory.create(ListItemViewModel.class).logIn(name, password);
         wFactory.create(ListItemViewModel.class).getSingleSubj().observe(this, new Observer<List<SingleSubj>>() {
             @Override
             public void onChanged(@Nullable List<SingleSubj> singleSubjs) {
+                long time = System.nanoTime();
                 if (singleSubjs != null) {
                     for (SingleSubj s : singleSubjs) {
                         wFactory.create(ListItemViewModel.class).insertSingleSubj(s);
                     }
                 }
+                progressDialog.dismiss();
+                Log.d("TIMELOADINGG", String.valueOf(System.nanoTime() - time));
                 doinit();
             }
         });
@@ -56,10 +66,10 @@ public class LoadingActivity extends AppCompatActivity {
     }
 
     private void doinit() {
-        finish();
         Intent i = new Intent(context, Listactivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
+        finish();
     }
 
 }

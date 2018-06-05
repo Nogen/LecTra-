@@ -58,9 +58,11 @@ public class DomRequester {
         }
         try {
             connection = (HttpURLConnection) this.url.openConnection();
-            connection.setConnectTimeout(1000);
+            connection.setUseCaches(false);
+            connection.setConnectTimeout(50);
             connection.setRequestProperty(AUTH, BASIC + base64Auth);
             String tmpcookie = connection.getHeaderField(SET_COOKIE);
+
             this.cookie = (tmpcookie != null) ? tmpcookie : this.cookie;
 
         } catch (IOException e) {
@@ -75,18 +77,18 @@ public class DomRequester {
     }
 
 
-    public String retriveDom() throws ConnectionException, LoginException {
-        this.retCookie();
+    public String retriveDom() throws ConnectionException {
+        if (this.cookie.isEmpty()) {
+            this.retCookie();
+        }
         String dom = new String();
         String line;
         try {
             connection = (HttpURLConnection) this.url.openConnection();
-            connection.setConnectTimeout(1000);
+            connection.setUseCaches(false);
+            connection.setConnectTimeout(50);
             connection.setRequestProperty(AUTH, BASIC + base64Auth);
             connection.setRequestProperty(COOKIE, this.cookie);
-            if (connection.getResponseCode() == 401) {
-                throw new LoginException("Wrong password or account");
-            }
             BufferedReader bufferedReader = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {

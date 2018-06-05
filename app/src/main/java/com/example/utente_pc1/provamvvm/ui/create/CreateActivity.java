@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;
 import com.example.utente_pc1.provamvvm.LecApplication;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -86,17 +88,13 @@ public class CreateActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(R.string.add_item);
 
-        calendarView = (CalendarView)findViewById(R.id.cal_date);
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String day = (dayOfMonth > 9) ? "" + dayOfMonth : "0" + dayOfMonth;
-                String mon = ((month + 1) > 9) ? "" + (month + 1) : "0" + (month + 1);
-                curdate = day + "/" + mon + "/" + year;
-            }
-        });
-
+        DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
+        int day = datePicker.getDayOfMonth();
+        int month = datePicker.getMonth() + 1;
+        int year = datePicker.getYear();
+        String dayformatted = (day > 9) ? "" + day : "0" + day;
+        String monthformatted = (month > 9) ? "" + month : "0" + month;
+        curdate = dayformatted + "/" + monthformatted + "/" + year;
 
         spinner = (Spinner)findViewById(R.id.spin_subj);
 
@@ -110,11 +108,7 @@ public class CreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SimpleDateFormat conv = new SimpleDateFormat("dd/MM/yyyy");
-                String defdate = conv.format(calendarView.getDate());
                 ListItemSubj tmp = new ListItemSubj();
-                if (curdate == null) {
-                    curdate = defdate;
-                }
                 try {
                     tmp.setHours(Integer.valueOf(hours.getText().toString()));
                     tmp.setDate(curdate);

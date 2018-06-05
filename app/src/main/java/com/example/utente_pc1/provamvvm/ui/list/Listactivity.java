@@ -4,6 +4,7 @@ package com.example.utente_pc1.provamvvm.ui.list;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -131,23 +132,16 @@ public class Listactivity extends AppCompatActivity {
     }
 
 
-    public void setData(final List<ListItemSubj> listOfDatapassed) {
+    public void setData(final List<ListItemSubj> listOfData) {
+        this.listOfData = listOfData;
         customAdapter = new CustomAdapter();
-        //recyclerView.setAdapter(customAdapter);
+        recyclerView.setAdapter(customAdapter);
         DividerItemDecoration itemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 layoutManager.getOrientation());
         recyclerView.addItemDecoration(itemDecoration);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(getDeleteCallback());
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
-        CustomTask datatask = new CustomTask(new Runnable() {
-            @Override
-            public void run() {
-                listOfData = listOfDatapassed;
-                recyclerView.setAdapter(customAdapter);
-            }
-        });
-        datatask.execute();
     }
 
     class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
@@ -164,7 +158,7 @@ public class Listactivity extends AppCompatActivity {
             ListItemSubj currentItem = listOfData.get(position);
             holder.date.setText(currentItem.getDate());
             holder.name.setText(currentItem.getName());
-            holder.hours.setText("" + currentItem.getHours());
+            holder.hours.setText(String.valueOf(currentItem.getHours()));
         }
 
         @Override

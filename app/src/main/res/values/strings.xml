@@ -19,58 +19,19 @@
     <string name="insert_number_of_hours_here">Insert number of hours here</string>
     <string name="lectra">LecTra</string>
     <string name="todo">TODO</string>
-    <string-array name="subjs_array">
-        <item>IGIENE GENERALE ED APPLICATA</item>
-        <item>MICROBIOLOGIA CLINICA</item>
-        <item>PATOLOGIA GENERALE</item>
-        <item>INFERMIERISTICA IN SANITÀ PUBBLICA...</item>
-        <item>PSICOLOGIA CLINICA</item>
-        <item>PSICOLOGIA GENERALE</item>
-        <item>SCIENZE INFERMIERISTICHE GENERALI...</item>
-        <item>TIROCINIO I</item>
-        <item>TIROCINIO II</item>
-        <item>TIROCINIO III</item>
-        <item>CARDIOCHIRURGIA</item>
-        <item>NEUROCHIRURGIA</item>
-        <item>UROLOGIA</item>
-        <item>OTORINOLARINGOIATRIA</item>
-        <item>MALATTIE DELL’APPARATO VISIVO</item>
-        <item>S.I. SPECIALISTICHE IN CHIRURGIA</item>
-        <item>ENDOCRINOLOGIA</item>
-        <item>GASTROENTEROLOGIA</item>
-        <item>MALATTIE DEL SANGUE</item>
-        <item>NEFROLOGIA</item>
-        <item>REUMATOLOGIA</item>
-        <item>ANATOMIA PATOLOGICA</item>
-        <item>BIOCHIMICA CLINICA</item>
-        <item>IMMUNOLOGIA</item>
-        <item>PATOLOGIA CLINICA</item>
-        <item>GERIATRIA</item>
-        <item>MALATTIE INFETTIVE</item>
-        <item>MEDICINA DEL LAVORO</item>
-        <item>ONCOLOGIA MEDICA</item>
-        <item>EBN</item>
-        <item>INFERMIERISTICA COMUNITARIA...</item>
-        <item>PEDIATRIA</item>
-        <item>GINECOLOGIA E OSTETRICIA</item>
-        <item>S.I. OSTETRICO‐GINECOLOGICHE...</item>
-        <item>ALLERGOLOGIA E IMMUNOLOGIA</item>
-        <item>FARMACOLOGIA</item>
-        <item>MEDICINA INTERNA</item>
-        <item>CHIRURGIA GENERALE</item>
-        <item>INFERMIERISTICA CLINICA IN CHIRURGIA</item>
-        <item>RADIOPROTEZIONE</item>
-        <item>MEDICNA LEGALE</item>
-        <item>DIRITTO DEL LAVORO</item>
-        <item>ETICA E DEONTOLOGIA APPLICATA...</item>
-        <item>MALATTIE DELL’APPARATO RESPIRATORIO</item>
-        <item>MALATTIE DELL’APPARATO CARDIOVASCOLARE</item>
-        <item>ANESTESIOLOGIA</item>
-        <item>INFERMIERISTICA IN AREA CRITICA..</item>
-        <item>NEUROLOGIA</item>
-        <item>MALATTIE APPARATO LOCOMOTORE</item>
-        <item>PSICHIATRIA</item>
-        <item>INFERMIERISTICA NELLA DISABILITÀ</item>
-    </string-array>
     <string name="title_activity_loading_activity">LoadingActivity</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Account Name</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
 </resources>

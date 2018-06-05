@@ -16,6 +16,9 @@ public interface ListItemSubjDao {
     @Query("SELECT * FROM listitemsubj ORDER BY inserttime DESC")
     public LiveData<List<ListItemSubj>> getItemCollection();
 
+    @Query("SELECT * FROM listitemsubj WHERE loginName = :loginName ORDER BY inserttime DESC")
+    public LiveData<List<ListItemSubj>> getItemByLogin(String loginName);
+
     @Query("SELECT * FROM listitemsubj WHERE name = :name")
     public LiveData<List<ListItemSubj>> getItemFilteredCollectionName(String name);
 
