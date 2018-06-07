@@ -2,6 +2,7 @@ package com.example.utente_pc1.provamvvm.model.data.remote;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import com.example.utente_pc1.provamvvm.model.data.local.GroupSubj;
 import com.example.utente_pc1.provamvvm.model.data.local.SingleSubj;

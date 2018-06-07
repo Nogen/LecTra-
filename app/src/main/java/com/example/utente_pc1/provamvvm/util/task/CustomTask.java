@@ -2,17 +2,31 @@ package com.example.utente_pc1.provamvvm.util.task;
 
 import android.os.AsyncTask;
 
-import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubj;
-
 public class CustomTask extends AsyncTask<Void, Void, Void> {
-    private Runnable r;
-    public CustomTask(Runnable r) {
-        this.r = r;
+    private Runnable doInBackgroundtask;
+    private Runnable doOnPostProcessTask;
+
+    public CustomTask(Runnable doInBackgroundtask) {
+        this.doInBackgroundtask = doInBackgroundtask;
+    }
+
+    public CustomTask(Runnable doInBackgroundtask, Runnable doOnPostProcessTask) {
+        this.doInBackgroundtask = doInBackgroundtask;
+        this.doOnPostProcessTask = doOnPostProcessTask;
     }
 
     @Override
     protected Void doInBackground(Void... aVoid) {
-        r.run();
+        doInBackgroundtask.run();
         return null;
     }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        if (doOnPostProcessTask != null) {
+            doOnPostProcessTask.run();
+        }
+    }
+
+
 }

@@ -3,6 +3,8 @@ package com.example.utente_pc1.provamvvm.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.os.AsyncTask;
+
 import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubj;
 import com.example.utente_pc1.provamvvm.model.data.local.SingleSubj;
 import com.example.utente_pc1.provamvvm.model.repository.SubjectRepository;
@@ -45,23 +47,8 @@ public class ListItemViewModel extends ViewModel {
     }
 
 
-    public void logIn(String name, String password) {
-        final String tmpname = name;
-        final String tmppsw = password;
-        CustomTask logintask = new CustomTask(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    subjectRepository.Login(tmpname, tmppsw);
-                } catch (LoginException e) {
-
-                } catch (ConnectionException e1) {
-
-                }
-                return;
-            }
-        });
-        logintask.execute();
+    public void logIn(String name, String password) throws LoginException, ConnectionException {
+        subjectRepository.Login(name, password);
     }
 
     public LiveData<List<SingleSubj>> getSingleSubj() {

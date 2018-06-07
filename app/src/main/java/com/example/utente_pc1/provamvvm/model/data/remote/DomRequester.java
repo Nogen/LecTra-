@@ -6,6 +6,7 @@ import com.example.utente_pc1.provamvvm.util.exceptions.LoginException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -77,7 +78,7 @@ public class DomRequester {
     }
 
 
-    public String retriveDom() throws ConnectionException {
+    public String retriveDom() throws ConnectionException, LoginException {
         if (this.cookie.isEmpty()) {
             this.retCookie();
         }
@@ -97,7 +98,12 @@ public class DomRequester {
             return dom;
 
         } catch (IOException e) {
-            throw error;
+            if (e instanceof ConnectException) {
+                throw error;
+            } else {
+                throw new LoginException("Wrong account name or password");
+            }
+
         } finally {
             if (connection != null) {
                 connection.disconnect();
