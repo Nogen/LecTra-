@@ -34,6 +34,10 @@ public class CustomViewModelFactory implements ViewModelProvider.Factory {
 
             return (T) new CreateItemViewModel(subjectRepository);
 
+        } else if (modelClass.isAssignableFrom(LoginViewModel.class)) {
+
+            return (T) new LoginViewModel(subjectRepository);
+
         } else {
 
             throw new IllegalArgumentException("ViewModel Not Found");

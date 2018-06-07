@@ -43,43 +43,8 @@ public class ListItemViewModel extends ViewModel {
             }
         });
         t.execute();
-
     }
 
-
-    public void logIn(String name, String password) throws LoginException, ConnectionException {
-        subjectRepository.Login(name, password);
-    }
-
-    public LiveData<List<SingleSubj>> getSingleSubj() {
-        MutableLiveData<List<SingleSubj>> mutableLiveData = new MutableLiveData<>();
-        NetCustomTask singlesubjtask = new NetCustomTask(mutableLiveData, subjectRepository);
-        singlesubjtask.execute();
-        return mutableLiveData;
-    }
-
-    public void insertSingleSubj(SingleSubj singleSubj) {
-        final SingleSubj tmp = singleSubj;
-        CustomTask inserttask = new CustomTask(new Runnable() {
-            @Override
-            public void run() {
-                subjectRepository.insertSingleSubjs(tmp);
-            }
-        });
-        inserttask.execute();
-    }
-
-    public void deleteAllsubj() {
-        CustomTask deleteall = new CustomTask(new Runnable() {
-
-            @Override
-            public void run() {
-                subjectRepository.deleteAllsubj();
-                return;
-            }
-        });
-        deleteall.execute();
-    }
 
 
 }

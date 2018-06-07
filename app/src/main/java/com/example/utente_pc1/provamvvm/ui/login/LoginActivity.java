@@ -26,7 +26,7 @@ import com.example.utente_pc1.provamvvm.ui.list.Listactivity;
 import com.example.utente_pc1.provamvvm.util.exceptions.ConnectionException;
 import com.example.utente_pc1.provamvvm.util.exceptions.LoginException;
 import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;
-import com.example.utente_pc1.provamvvm.viewmodel.ListItemViewModel;
+import com.example.utente_pc1.provamvvm.viewmodel.LoginViewModel;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ import javax.inject.Inject;
 public class LoginActivity extends AppCompatActivity {
     @Inject
     CustomViewModelFactory wFactory;
-    ListItemViewModel listItemViewModel;
+    LoginViewModel loginViewModel;
     private LifecycleOwner context;
     private EditText nametext;
     private EditText password;
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 .getLecComponent()
                 .inject(this);
 
-        listItemViewModel = wFactory.create(ListItemViewModel.class);
+        loginViewModel = wFactory.create(LoginViewModel.class);
         context = this;
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Login...");
@@ -68,14 +68,14 @@ public class LoginActivity extends AppCompatActivity {
                             .show();
                 } else {
                     progressDialog.show();
-                    listItemViewModel.deleteAllsubj();
+                    loginViewModel.deleteAllsubj();
                     AsyncTask<Void, Void, Void> login = new AsyncTask<Void, Void, Void>() {
                         private String errormessage;
 
                         @Override
                         protected Void doInBackground(Void... voids) {
                             try {
-                                listItemViewModel.logIn(nametext.getText().toString(), password.getText().toString());
+                                loginViewModel.logIn(nametext.getText().toString(), password.getText().toString());
                             } catch (ConnectionException e) {
                                 errormessage = e.getMessage();
                             } catch (LoginException e1) {
@@ -102,12 +102,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void doafterlogin() {
-        listItemViewModel.getSingleSubj().observe(context, new Observer<List<SingleSubj>>() {
+        loginViewModel.getSingleSubj().observe(context, new Observer<List<SingleSubj>>() {
             @Override
             public void onChanged(@Nullable List<SingleSubj> singleSubjs) {
                 if (singleSubjs != null) {
                     for (SingleSubj single : singleSubjs) {
-                        listItemViewModel.insertSingleSubj(single);
+                        loginViewModel.insertSingleSubj(single);
                     }
                     progressDialog.dismiss();
                     toHomeActivity();
