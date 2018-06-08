@@ -111,22 +111,18 @@ public class Esse3Api {
         doc = Jsoup.parse(html);
         elements = doc.select("th.detail_table");
         div = elements.size();
-        counter = 0;
         elements = doc.select("td.detail_table");
 
-        for (Element e : elements) {
-            counter = counter % div;
-            if (counter == 0) {
-                key = e.text()
-                        .split("-")[0]
-                        .trim();
-            } else if (counter == div - 1) {
-                value = Float.valueOf(e.
-                        text()
-                        .trim());
-                blockSubjHours.put(key, value);
-            }
-            counter++;
+        for (int i = 0; i < (elements.size() - div); i += div) {
+            blockSubjHours.put(elements.
+                            get(i).
+                            text()
+                            .split("-")[0]
+                            .trim(),
+                    Float.valueOf(elements.
+                            get(i + (div - 1)).
+                            text().
+                            trim()));
         }
         return blockSubjHours;
     }
