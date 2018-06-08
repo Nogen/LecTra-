@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.utente_pc1.provamvvm.model.data.local.SingleSubj;
+import com.example.utente_pc1.provamvvm.model.data.local.UserLogin;
 import com.example.utente_pc1.provamvvm.model.repository.SubjectRepository;
 import com.example.utente_pc1.provamvvm.util.exceptions.ConnectionException;
 import com.example.utente_pc1.provamvvm.util.exceptions.LoginException;
@@ -41,6 +42,17 @@ public class LoginViewModel extends ViewModel {
             }
         });
         inserttask.execute();
+    }
+
+    public void insertUser(UserLogin userLogin) {
+        final UserLogin tmp = userLogin;
+        CustomTask insertlogin = new CustomTask(new Runnable() {
+            @Override
+            public void run() {
+                subjectRepository.insertUser(tmp);
+            }
+        });
+        insertlogin.execute();
     }
 
     public void deleteAllsubj() {

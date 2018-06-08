@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.utente_pc1.provamvvm.LecApplication;
 import com.example.utente_pc1.provamvvm.R;
 import com.example.utente_pc1.provamvvm.model.data.local.SingleSubj;
+import com.example.utente_pc1.provamvvm.model.data.local.UserLogin;
 import com.example.utente_pc1.provamvvm.ui.list.Listactivity;
 
 import com.example.utente_pc1.provamvvm.util.exceptions.ConnectionException;
@@ -109,6 +110,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void doafterlogin() {
+        UserLogin usertmp = new UserLogin();
+        usertmp.setLoginName(accountName);
+        usertmp.setLoginPassword(psw);
+        loginViewModel.insertUser(usertmp);
         loginViewModel.getSingleSubj().observe(context, new Observer<List<SingleSubj>>() {
             @Override
             public void onChanged(@Nullable List<SingleSubj> singleSubjs) {
@@ -129,7 +134,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void toHomeActivity() {
         Intent i = new Intent((Context) context, Listactivity.class);
-        Log.d(USER, accountName);
         i.putExtra(USER, accountName);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);

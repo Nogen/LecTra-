@@ -22,4 +22,8 @@ public class DetailItemViewModel extends ViewModel {
         return this.subjectRepository.getDates(name, user);
     }
 
+    public LiveData<Float> getSingleSubjHours(String subjName) {
+        return this.subjectRepository.getSingleSubjHours(subjName);
+    }
+
 }

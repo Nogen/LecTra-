@@ -1,5 +1,7 @@
 package com.example.utente_pc1.provamvvm.ui.detail;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -32,6 +34,7 @@ public class DetailActivity extends AppCompatActivity {
     private LinearLayoutManager layoutManager;
     private RecyclerView recyclerView;
     private TextView texthours;
+    private TextView textSubjHours;
     private String userName;
 
 
@@ -65,6 +68,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
         texthours = (TextView) findViewById(R.id.txtdt_totalhours);
+        textSubjHours = (TextView) findViewById(R.id.txtdt_totalsubjhours);
 
         TextView textname = (TextView) findViewById(R.id.txtv_name);
 
@@ -81,6 +85,15 @@ public class DetailActivity extends AppCompatActivity {
             public void onChanged(@Nullable Integer integer) {
                 if (integer != null) {
                     texthours.setText(String.valueOf(integer));
+                }
+            }
+        });
+
+        detailItemViewModel.getSingleSubjHours(name).observe(this, new Observer<Float>() {
+            @Override
+            public void onChanged(@Nullable Float aFloat) {
+                if (aFloat != null) {
+                    textSubjHours.setText(" / " + aFloat.toString());
                 }
             }
         });
