@@ -14,12 +14,12 @@ public class DetailItemViewModel extends ViewModel {
         this.subjectRepository = subjectRepository;
     }
 
-    public LiveData<Integer> getTotalHour(String name) {
-        return this.subjectRepository.getTotalHours(name);
+    public LiveData<Integer> getTotalHour(String name, String user) {
+        return this.subjectRepository.getTotalHours(name, user);
     }
 
-    public LiveData<List<String>> getDates(String name) {
-        return this.subjectRepository.getDates(name);
+    public LiveData<List<String>> getDates(String name, String user) {
+        return this.subjectRepository.getDates(name, user);
     }
 
 }

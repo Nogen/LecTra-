@@ -26,11 +26,13 @@ import javax.inject.Inject;
 
 public class DetailActivity extends AppCompatActivity {
     private final static String NAME_DETAIL = "NAME_DETAIL";
+    private final static String USER = "USER";
 
     private LayoutInflater layoutInflater;
     private LinearLayoutManager layoutManager;
     private RecyclerView recyclerView;
     private TextView texthours;
+    private String userName;
 
 
     @Inject
@@ -70,10 +72,11 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         String name = i.getExtras().getString(NAME_DETAIL);
+        userName = i.getExtras().getString(USER);
 
         textname.setText(name);
 
-        detailItemViewModel.getTotalHour(name).observe(this, new android.arch.lifecycle.Observer<Integer>() {
+        detailItemViewModel.getTotalHour(name, userName).observe(this, new android.arch.lifecycle.Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer integer) {
                 if (integer != null) {
@@ -82,7 +85,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        detailItemViewModel.getDates(name).observe(this, new android.arch.lifecycle.Observer<List<String>>() {
+        detailItemViewModel.getDates(name, userName).observe(this, new android.arch.lifecycle.Observer<List<String>>() {
             @Override
             public void onChanged(@Nullable List<String> strings) {
                 if (datelist == null) {

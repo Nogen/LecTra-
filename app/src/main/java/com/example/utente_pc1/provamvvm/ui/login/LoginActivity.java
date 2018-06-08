@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
@@ -34,6 +35,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class LoginActivity extends AppCompatActivity {
+    private final static String USER = "USER";
+
     @Inject
     CustomViewModelFactory wFactory;
     LoginViewModel loginViewModel;
@@ -42,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password;
     private Button login;
     private ProgressDialog progressDialog;
+    private String accountName;
+    private String psw;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,7 +68,9 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (nametext.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
+                accountName = nametext.getText().toString();
+                psw = password.getText().toString();
+                if (accountName.isEmpty() || psw.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "You have to complete login form!", Toast.LENGTH_LONG)
                             .show();
                 } else {
@@ -122,6 +129,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void toHomeActivity() {
         Intent i = new Intent((Context) context, Listactivity.class);
+        Log.d(USER, accountName);
+        i.putExtra(USER, accountName);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
         finish();

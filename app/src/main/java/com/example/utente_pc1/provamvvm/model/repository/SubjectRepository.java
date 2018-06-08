@@ -29,6 +29,10 @@ public class SubjectRepository {
         return this.listItemSubjDao.getItemCollection();
     }
 
+    public LiveData<List<ListItemSubj>> getItemByLogin(String loginName) {
+        return this.listItemSubjDao.getItemByLogin(loginName);
+    }
+
     public LiveData<List<ListItemSubj>> getListItemFilteredCollectionName(String name) {
         return this.listItemSubjDao.getItemFilteredCollectionName(name);
     }
@@ -37,12 +41,12 @@ public class SubjectRepository {
         return this.listItemSubjDao.getItemFileredCollectionDate(date);
     }
 
-    public LiveData<Integer> getTotalHours(String name) {
-        return this.listItemSubjDao.getTotalHours(name);
+    public LiveData<Integer> getTotalHours(String name, String user) {
+        return this.listItemSubjDao.getTotalHours(name, user);
     }
 
-    public LiveData<List<String>> getDates(String name) {
-        return this.listItemSubjDao.getDates(name);
+    public LiveData<List<String>> getDates(String name, String user) {
+        return this.listItemSubjDao.getDates(name, user);
     }
 
     public void InsertSubj(ListItemSubj listItemSubj) {

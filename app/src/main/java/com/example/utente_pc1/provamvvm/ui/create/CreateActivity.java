@@ -1,16 +1,17 @@
 package com.example.utente_pc1.provamvvm.ui.create;
 
 
+import android.annotation.TargetApi;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,6 +37,8 @@ import javax.inject.Inject;
 
 
 public class CreateActivity extends AppCompatActivity {
+    private final static String USER = "USER";
+
     @Inject
     CustomViewModelFactory wFactory;
     private Context context;
@@ -45,6 +48,7 @@ public class CreateActivity extends AppCompatActivity {
     private Button addbtn;
     private String curdate;
     private ArrayAdapter<String> adapter;
+    private String userName;
 
 
     @Override
@@ -60,6 +64,7 @@ public class CreateActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +74,8 @@ public class CreateActivity extends AppCompatActivity {
 
         ((LecApplication) getApplication()).getLecComponent().inject(this);
 
+        Intent i = getIntent();
+        userName = i.getExtras().getString(USER);
 
         wFactory.create(CreateItemViewModel.class).getSingleSubj().observe(this, new Observer<List<SingleSubj>>() {
             @Override
@@ -88,13 +95,16 @@ public class CreateActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(R.string.add_item);
 
-        DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
-        int day = datePicker.getDayOfMonth();
-        int month = datePicker.getMonth() + 1;
-        int year = datePicker.getYear();
-        String dayformatted = (day > 9) ? "" + day : "0" + day;
-        String monthformatted = (month > 9) ? "" + month : "0" + month;
-        curdate = dayformatted + "/" + monthformatted + "/" + year;
+        final CalendarView calendarView = (CalendarView) findViewById(R.id.calendar_activity_create);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                String dayformatted = (dayOfMonth > 9) ? "" + dayOfMonth : "0" + dayOfMonth;
+                String monthformatted = (month + 1 > 9) ? "" + (month + 1) : "0" + (month + 1);
+                curdate = dayformatted + "/" + monthformatted + "/" + year;
+            }
+        });
+
 
         spinner = (Spinner)findViewById(R.id.spin_subj);
 
@@ -107,13 +117,19 @@ public class CreateActivity extends AppCompatActivity {
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 SimpleDateFormat conv = new SimpleDateFormat("dd/MM/yyyy");
+                if (curdate == null) {
+                    Date date = new Date(calendarView.getDate());
+                    curdate = conv.format(date);
+                }
                 ListItemSubj tmp = new ListItemSubj();
                 try {
                     tmp.setHours(Integer.valueOf(hours.getText().toString()));
                     tmp.setDate(curdate);
                     tmp.setName(spinner.getSelectedItem().toString());
                     tmp.setInserttime(conv.parse(curdate).getTime());
+                    tmp.setLoginName(userName);
                     wFactory.create(CreateItemViewModel.class).insertSubj(tmp);
                     startListActivity();
                 } catch (Exception e) {
@@ -132,6 +148,7 @@ public class CreateActivity extends AppCompatActivity {
 
     public void startListActivity() {
         Intent i = new Intent(this, Listactivity.class);
+        i.putExtra(USER, userName);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
         finished();

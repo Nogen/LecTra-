@@ -42,8 +42,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class Listactivity extends AppCompatActivity {
-
     private final static String NAME_DETAIL = "NAME_DETAIL";
+    private final static String USER = "USER";
 
     @Inject
     CustomViewModelFactory vFactory;
@@ -53,6 +53,7 @@ public class Listactivity extends AppCompatActivity {
     private LinearLayoutManager layoutManager;
     private CustomAdapter customAdapter;
     private Context context;
+    private String userName;
 
 
     @Override
@@ -66,6 +67,9 @@ public class Listactivity extends AppCompatActivity {
 
 
         context = this;
+        Intent i = getIntent();
+        userName = i.getExtras().getString(USER);
+
         layoutInflater = getLayoutInflater();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tlb_list_activity);
@@ -87,7 +91,7 @@ public class Listactivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
 
-        vFactory.create(ListItemViewModel.class).getListData().observe(this, new Observer<List<ListItemSubj>>() {
+        vFactory.create(ListItemViewModel.class).getItemByLogin(userName).observe(this, new Observer<List<ListItemSubj>>() {
                     @Override
                     public void onChanged(@Nullable List<ListItemSubj> listItemSubjs) {
                         if (listOfData == null) {
@@ -101,6 +105,7 @@ public class Listactivity extends AppCompatActivity {
     public void startDetailActivity(String name, View view) {
         Intent i = new Intent(this, DetailActivity.class);
         i.putExtra(NAME_DETAIL, name);
+        i.putExtra(USER, userName);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setEnterTransition(new Fade(Fade.IN));
@@ -118,6 +123,7 @@ public class Listactivity extends AppCompatActivity {
 
     public void startCreateActivity() {
         Intent i = new Intent(this, CreateActivity.class);
+        i.putExtra(USER, userName);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setEnterTransition(new Fade(Fade.IN));

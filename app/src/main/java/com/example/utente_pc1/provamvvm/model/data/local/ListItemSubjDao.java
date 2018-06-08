@@ -25,11 +25,11 @@ public interface ListItemSubjDao {
     @Query("SELECT * FROM listitemsubj WHERE date = :date")
     public LiveData<List<ListItemSubj>> getItemFileredCollectionDate(String date);
 
-    @Query("SELECT SUM(hours) FROM listitemsubj WHERE name = :name")
-    public LiveData<Integer> getTotalHours(String name);
+    @Query("SELECT SUM(hours) FROM listitemsubj WHERE name = :name AND loginName = :user")
+    public LiveData<Integer> getTotalHours(String name, String user);
 
-    @Query("SELECT date FROM listitemsubj WHERE name = :name")
-    public LiveData<List<String>> getDates(String name);
+    @Query("SELECT date FROM listitemsubj WHERE name = :name AND loginName = :user")
+    public LiveData<List<String>> getDates(String name, String user);
 
     @Query("SELECT * FROM groupsubj")
     public LiveData<List<GroupSubj>> getGroups();

@@ -27,6 +27,10 @@ public class ListItemViewModel extends ViewModel {
         return this.subjectRepository.getListItemCollection();
     }
 
+    public LiveData<List<ListItemSubj>> getItemByLogin(String loginName) {
+        return this.subjectRepository.getItemByLogin(loginName);
+    }
+
     public LiveData<List<ListItemSubj>> getListFilteredName(String name) {
         return this.subjectRepository.getListItemFilteredCollectionName(name);
     }
