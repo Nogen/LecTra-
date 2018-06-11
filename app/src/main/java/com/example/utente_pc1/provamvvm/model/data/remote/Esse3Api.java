@@ -50,6 +50,7 @@ public class Esse3Api {
         this.requester.doSingleReq();
         this.requester.resetAuthentication();
         domLibretto = new String();
+        subSubjs = new HashMap<>();
     }
 
 
@@ -79,6 +80,7 @@ public class Esse3Api {
     }
 
     public List<String> getSubjects() throws ConnectionException, LoginException {
+        Log.d("CHEBALLE", this.subSubjs.toString());
         List<String> subjects = new ArrayList<String>();
 
         if (domLibretto.isEmpty()) {
@@ -121,9 +123,20 @@ public class Esse3Api {
         doc = Jsoup.parse(html);
         elements = doc.select("th.detail_table");
         div = elements.size();
-        counter = 0;
+        //counter = 0;
         elements = doc.select("td.detail_table");
 
+        for (int i = 0; i < elements.size() - (div - 1); i += div) {
+            blockSubjHours.put(
+                    elements.get(i)
+                            .text()
+                            .trim(),
+                    Float.valueOf(elements.get(i + div - 1)
+                            .text()
+                            .trim())
+            );
+        }
+        /*
         for (Element e : elements) {
             counter = counter % div;
             if (counter == 0) {
@@ -137,7 +150,7 @@ public class Esse3Api {
                 blockSubjHours.put(key, value);
             }
             counter++;
-        }
+        }*/
         return blockSubjHours;
     }
 
@@ -166,7 +179,6 @@ public class Esse3Api {
     }
 
     public List<SingleSubj> getSubjs() throws ConnectionException, LoginException {
-
         List<SingleSubj> subjects = new ArrayList<>();
         HashMap<String, Float> tmpsubj;
 
