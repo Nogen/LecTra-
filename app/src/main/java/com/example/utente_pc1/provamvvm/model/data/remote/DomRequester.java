@@ -70,10 +70,10 @@ public class DomRequester {
             this.cookie = (tmpcookie != null) ? tmpcookie : this.cookie;
 
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             throw error;
         } catch (Exception e1) {
-            e1.printStackTrace();
+            //e1.printStackTrace();
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -100,7 +100,7 @@ public class DomRequester {
             return dom;
 
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             if (e instanceof ConnectException) {
                 throw error;
             } else {
@@ -108,7 +108,7 @@ public class DomRequester {
             }
 
         } catch (Exception e1) {
-            e1.printStackTrace();
+            //e1.printStackTrace();
             throw error;
 
         } finally {
