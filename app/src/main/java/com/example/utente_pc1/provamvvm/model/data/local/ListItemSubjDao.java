@@ -42,30 +42,30 @@ public interface ListItemSubjDao {
     public void insertListItemSubj(ListItemSubj listItemSubj);
 
     /*----------------------------------- GROUPS --------------------------------*/
-    @Query("SELECT * FROM groupsubj")
-    public LiveData<List<GroupSubj>> getGroups();
+    @Query("SELECT * FROM groupsubj WHERE userName = :userName")
+    public LiveData<List<GroupSubj>> getGroups(String userName);
 
-    @Query("SELECT totalHours FROM groupsubj WHERE GroupName = :groupName")
-    public LiveData<Float> getTotalGrupHours(String groupName);
+    @Query("SELECT totalHours FROM groupsubj WHERE GroupName = :groupName AND userName = :userName")
+    public LiveData<Float> getTotalGrupHours(String groupName, String userName);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertGroupSubj(GroupSubj groupSubj);
 
     /*----------------------------------- SINGLE SUBJ --------------------------------*/
-    @Query("SELECT * FROM singlesubj")
-    public LiveData<List<SingleSubj>> getSubjs();
+    @Query("SELECT * FROM singlesubj WHERE userName = :userName")
+    public LiveData<List<SingleSubj>> getSubjs(String userName);
 
-    @Query("SELECT * FROM singlesubj WHERE groupName = :groupName")
-    public LiveData<List<SingleSubj>> getSubjsbyGroup(String groupName);
+    @Query("SELECT * FROM singlesubj WHERE groupName = :groupName AND userName = :userName")
+    public LiveData<List<SingleSubj>> getSubjsbyGroup(String groupName, String userName);
 
-    @Query("SELECT subjHours FROM singlesubj WHERE subjName = :subjName")
-    public LiveData<Float> getSingleSubjHours(String subjName);
+    @Query("SELECT subjHours FROM singlesubj WHERE subjName = :subjName AND userName = :userName")
+    public LiveData<Float> getSingleSubjHours(String subjName, String userName);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertSingleSubjs(SingleSubj singleSubj);
 
-    @Query("DELETE FROM singlesubj")
-    public void deleteAllsubj();
+    @Query("DELETE FROM singlesubj WHERE userName = :userName")
+    public void deleteAllsubj(String userName);
 
     /*----------------------------------- USERS --------------------------------*/
 

@@ -29,8 +29,8 @@ public class CreateItemViewModel extends ViewModel {
         t.execute(listItemSubj);
     }
 
-    public LiveData<List<SingleSubj>> getSingleSubj() {
-        return this.subjectRepository.getSubjs();
+    public LiveData<List<SingleSubj>> getSingleSubj(String userName) {
+        return this.subjectRepository.getSubjs(userName);
     }
 
     class CustomTask extends AsyncTask<ListItemSubj, Void, Void> {

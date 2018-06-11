@@ -14,8 +14,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -23,12 +25,15 @@ import com.example.utente_pc1.provamvvm.LecApplication;
 import com.example.utente_pc1.provamvvm.R;
 import com.example.utente_pc1.provamvvm.model.data.local.SingleSubj;
 import com.example.utente_pc1.provamvvm.model.data.local.UserLogin;
-import com.example.utente_pc1.provamvvm.ui.list.Listactivity;
+import com.example.utente_pc1.provamvvm.ui.list.ListActivity;
 
+import com.example.utente_pc1.provamvvm.ui.login.offline.OfflineActivity;
 import com.example.utente_pc1.provamvvm.util.exceptions.ConnectionException;
 import com.example.utente_pc1.provamvvm.util.exceptions.LoginException;
 import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;
 import com.example.utente_pc1.provamvvm.viewmodel.LoginViewModel;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -45,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText nametext;
     private EditText password;
     private Button login;
+    private TextView offlinelink;
     private ProgressDialog progressDialog;
     private String accountName;
     private String psw;
@@ -54,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_login);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         ((LecApplication) getApplication())
                 .getLecComponent()
                 .inject(this);
@@ -61,10 +68,18 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel = wFactory.create(LoginViewModel.class);
         context = this;
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Login...");
         nametext = (EditText) findViewById(R.id.account);
         password = (EditText) findViewById(R.id.password);
         login = (Button) findViewById(R.id.email_sign_in_button);
+        offlinelink = (TextView) findViewById(R.id.txtlog_offlinelogin);
+
+        offlinelink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent((Context) context, OfflineActivity.class);
+                startActivity(i);
+            }
+        });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,19 +90,23 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "You have to complete login form!", Toast.LENGTH_LONG)
                             .show();
                 } else {
+                    progressDialog.setMessage("Login...");
                     progressDialog.show();
-                    loginViewModel.deleteAllsubj();
                     AsyncTask<Void, Void, Void> login = new AsyncTask<Void, Void, Void>() {
                         private String errormessage;
 
                         @Override
                         protected Void doInBackground(Void... voids) {
                             try {
-                                loginViewModel.logIn(nametext.getText().toString(), password.getText().toString());
+                                loginViewModel.logIn(accountName, psw);
                             } catch (ConnectionException e) {
+                                e.printStackTrace();
                                 errormessage = e.getMessage();
                             } catch (LoginException e1) {
+                                e1.printStackTrace();
                                 errormessage = e1.getMessage();
+                            } catch (Exception e2) {
+                                e2.printStackTrace();
                             }
                             return null;
                         }
@@ -103,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                     };
+
                     login.execute();
                 }
             }
@@ -114,18 +134,20 @@ public class LoginActivity extends AppCompatActivity {
         usertmp.setLoginName(accountName);
         usertmp.setLoginPassword(psw);
         loginViewModel.insertUser(usertmp);
+        loginViewModel.deleteAllsubj(accountName);
         loginViewModel.getSingleSubj().observe(context, new Observer<List<SingleSubj>>() {
             @Override
             public void onChanged(@Nullable List<SingleSubj> singleSubjs) {
                 if (singleSubjs != null) {
                     for (SingleSubj single : singleSubjs) {
+                        single.setUserName(accountName);
                         loginViewModel.insertSingleSubj(single);
                     }
                     progressDialog.dismiss();
                     toHomeActivity();
                 } else {
                     progressDialog.dismiss();
-                    Toast.makeText((Context) context, "Internet Connection Missing!", Toast.LENGTH_LONG);
+                    Toast.makeText((Context) context, "Internet Connection Missing!", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -133,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void toHomeActivity() {
-        Intent i = new Intent((Context) context, Listactivity.class);
+        Intent i = new Intent(this, ListActivity.class);
         i.putExtra(USER, accountName);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);

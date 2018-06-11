@@ -34,12 +34,13 @@ public class Esse3Api {
 
 
     public Esse3Api() {
+        this.requester = new DomRequester();
         domLibretto = new String();
-        subSubjs = new HashMap<String, String>();
+        subSubjs = new HashMap<>();
     }
 
     public void Login(String name, String password) throws ConnectionException, LoginException {
-        this.requester = new DomRequester(name, password);
+        this.requester.setAuthentication(name, password);
         this.requester.setUrl(URLLOGIN);
         this.requester.retriveDom();
     }
@@ -47,6 +48,8 @@ public class Esse3Api {
     public void Logout() throws ConnectionException {
         this.requester.setUrl(URLLOGOUT);
         this.requester.doSingleReq();
+        this.requester.resetAuthentication();
+        domLibretto = new String();
     }
 
 
@@ -95,7 +98,7 @@ public class Esse3Api {
 
 
     public HashMap<String, Float> getDetailSubj(String subj) throws ConnectionException, LoginException {
-        HashMap<String, Float> blockSubjHours = new HashMap<String, Float>();
+        HashMap<String, Float> blockSubjHours = new HashMap<>();
         int div;
         int counter = 0;
         String key = new String();
@@ -108,21 +111,32 @@ public class Esse3Api {
         }
         this.requester.setUrl(URLBASE + this.subSubjs.get(subj));
         String html = this.requester.retriveDom();
+
+        /*
+        int chunk = 1000;
+        for (int i = 0; i < html.length(); i += chunk) {
+            Log.d("HTML", html.substring(i, Math.min(html.length(), i + chunk)));
+        }
+        */
         doc = Jsoup.parse(html);
         elements = doc.select("th.detail_table");
         div = elements.size();
+        counter = 0;
         elements = doc.select("td.detail_table");
 
-        for (int i = 0; i < (elements.size() - div); i += div) {
-            blockSubjHours.put(elements.
-                            get(i).
-                            text()
-                            .split("-")[0]
-                            .trim(),
-                    Float.valueOf(elements.
-                            get(i + (div - 1)).
-                            text().
-                            trim()));
+        for (Element e : elements) {
+            counter = counter % div;
+            if (counter == 0) {
+                key = e.text()
+                        .split("-")[0]
+                        .trim();
+            } else if (counter == div - 1) {
+                value = Float.valueOf(e.
+                        text()
+                        .trim());
+                blockSubjHours.put(key, value);
+            }
+            counter++;
         }
         return blockSubjHours;
     }

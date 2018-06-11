@@ -55,15 +55,23 @@ public class LoginViewModel extends ViewModel {
         insertlogin.execute();
     }
 
-    public void deleteAllsubj() {
+    public void deleteAllsubj(final String userName) {
         CustomTask deleteall = new CustomTask(new Runnable() {
 
             @Override
             public void run() {
-                subjectRepository.deleteAllsubj();
+                subjectRepository.deleteAllsubj(userName);
                 return;
             }
         });
         deleteall.execute();
+    }
+
+    public LiveData<List<UserLogin>> getUserLogins() {
+        return this.subjectRepository.getUserLogins();
+    }
+
+    public LiveData<String> isUserThere(String userName) {
+        return this.subjectRepository.isUserThere(userName);
     }
 }

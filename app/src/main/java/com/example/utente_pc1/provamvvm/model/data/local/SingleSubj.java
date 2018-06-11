@@ -12,6 +12,7 @@ public class SingleSubj {
     private String subjName;
     private String groupName;
     private Float subjHours;
+    private String userName;
 
 
     public SingleSubj() {
@@ -48,5 +49,13 @@ public class SingleSubj {
 
     public void setSubjHours(Float subjHours) {
         this.subjHours = subjHours;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

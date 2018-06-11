@@ -89,7 +89,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        detailItemViewModel.getSingleSubjHours(name).observe(this, new Observer<Float>() {
+        detailItemViewModel.getSingleSubjHours(name, userName).observe(this, new Observer<Float>() {
             @Override
             public void onChanged(@Nullable Float aFloat) {
                 if (aFloat != null) {

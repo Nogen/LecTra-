@@ -25,7 +25,8 @@
             <ImageView
                 android:layout_width="173dp"
                 android:layout_height="153dp"
-                android:src="@drawable/lectralogo" />
+                android:src="@drawable/lectralogo"
+                android:contentDescription="TODO" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -70,6 +71,14 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtlog_offlinelogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/click_the_link_below_to_do_offline_login"
+                android:layout_marginTop="15dp" />
+
 
         </LinearLayout>
     </ScrollView>

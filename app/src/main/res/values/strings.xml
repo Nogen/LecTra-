@@ -27,5 +27,6 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
+    <string name="click_the_link_below_to_do_offline_login">If you logged once, click <u>THIS LINK</u> to do offline login</string>
 
 </resources>

@@ -26,6 +26,9 @@ public class DomRequester {
     private HttpURLConnection connection;
     private ConnectionException error = new ConnectionException("Internet connection missing!");
 
+    public DomRequester() {
+
+    }
 
     public DomRequester(String name, String password) {
         this.setAuthentication(name, password);
@@ -39,10 +42,12 @@ public class DomRequester {
     public void setAuthentication(String name, String password) {
         String auth = name + ":" + password;
         this.base64Auth = Base64.encodeToString(auth.getBytes(), Base64.DEFAULT);
+        this.cookie = new String();
     }
 
     public void resetAuthentication() {
         this.base64Auth = new String();
+        this.cookie = new String();
     }
 
     public void setUrl(String url) {
@@ -59,17 +64,16 @@ public class DomRequester {
         }
         try {
             connection = (HttpURLConnection) this.url.openConnection();
-            connection.setUseCaches(false);
-            connection.setConnectTimeout(50);
             connection.setRequestProperty(AUTH, BASIC + base64Auth);
             String tmpcookie = connection.getHeaderField(SET_COOKIE);
 
             this.cookie = (tmpcookie != null) ? tmpcookie : this.cookie;
 
         } catch (IOException e) {
+            e.printStackTrace();
             throw error;
         } catch (Exception e1) {
-
+            e1.printStackTrace();
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -86,8 +90,6 @@ public class DomRequester {
         String line;
         try {
             connection = (HttpURLConnection) this.url.openConnection();
-            connection.setUseCaches(false);
-            connection.setConnectTimeout(50);
             connection.setRequestProperty(AUTH, BASIC + base64Auth);
             connection.setRequestProperty(COOKIE, this.cookie);
             BufferedReader bufferedReader = new BufferedReader(
@@ -98,11 +100,16 @@ public class DomRequester {
             return dom;
 
         } catch (IOException e) {
+            e.printStackTrace();
             if (e instanceof ConnectException) {
                 throw error;
             } else {
                 throw new LoginException("Wrong account name or password");
             }
+
+        } catch (Exception e1) {
+            e1.printStackTrace();
+            throw error;
 
         } finally {
             if (connection != null) {

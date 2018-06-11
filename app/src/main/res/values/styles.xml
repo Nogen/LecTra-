@@ -6,11 +6,15 @@
         <item name="android:windowActivityTransitions" tools:targetApi="lollipop" tools:ignore="NewApi">
             true
         </item>
-
         <item name="android:homeAsUpIndicator">@drawable/baseline_arrow_white_18dp</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <style name="BIANCO" parent="AppTheme">
+        <item name="android:textColorSecondary">@color/textOnDark</item>
     </style>
 
     <style name="SplashTheme" parent="AppTheme">

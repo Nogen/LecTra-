@@ -1,14 +1,12 @@
 package com.example.utente_pc1.provamvvm.ui.create;
 
 
-import android.annotation.TargetApi;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +14,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,7 +21,7 @@ import android.widget.Toast;
 import com.example.utente_pc1.provamvvm.R;
 import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubj;
 import com.example.utente_pc1.provamvvm.model.data.local.SingleSubj;
-import com.example.utente_pc1.provamvvm.ui.list.Listactivity;
+import com.example.utente_pc1.provamvvm.ui.list.ListActivity;
 import com.example.utente_pc1.provamvvm.viewmodel.CreateItemViewModel;
 import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;
 import com.example.utente_pc1.provamvvm.LecApplication;
@@ -77,7 +74,7 @@ public class CreateActivity extends AppCompatActivity {
         Intent i = getIntent();
         userName = i.getExtras().getString(USER);
 
-        wFactory.create(CreateItemViewModel.class).getSingleSubj().observe(this, new Observer<List<SingleSubj>>() {
+        wFactory.create(CreateItemViewModel.class).getSingleSubj(userName).observe(this, new Observer<List<SingleSubj>>() {
             @Override
             public void onChanged(@Nullable List<SingleSubj> singleSubjs) {
                 adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item);
@@ -147,7 +144,7 @@ public class CreateActivity extends AppCompatActivity {
     }
 
     public void startListActivity() {
-        Intent i = new Intent(this, Listactivity.class);
+        Intent i = new Intent(this, ListActivity.class);
         i.putExtra(USER, userName);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);

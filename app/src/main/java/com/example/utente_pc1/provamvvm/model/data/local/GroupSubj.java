@@ -10,6 +10,7 @@ public class GroupSubj {
     @NonNull
     private String GroupName;
     private Float totalHours;
+    private String userName;
 
     public GroupSubj() {
     }
@@ -34,5 +35,13 @@ public class GroupSubj {
 
     public void setTotalHours(Float totalHours) {
         this.totalHours = totalHours;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

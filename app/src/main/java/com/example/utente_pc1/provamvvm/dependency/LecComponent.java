@@ -4,8 +4,9 @@ import android.app.Application;
 
 import com.example.utente_pc1.provamvvm.ui.create.CreateActivity;
 import com.example.utente_pc1.provamvvm.ui.detail.DetailActivity;
-import com.example.utente_pc1.provamvvm.ui.list.Listactivity;
+import com.example.utente_pc1.provamvvm.ui.list.ListActivity;
 import com.example.utente_pc1.provamvvm.ui.login.LoginActivity;
+import com.example.utente_pc1.provamvvm.ui.login.offline.OfflineActivity;
 
 
 import javax.inject.Singleton;
@@ -18,11 +19,13 @@ public interface LecComponent {
 
     void inject(LoginActivity loginActivity);
 
-    void inject(Listactivity listactivity);
+    void inject(ListActivity listActivity);
 
     void inject(DetailActivity detailActivity);
 
     void inject(CreateActivity createActivity);
+
+    void inject(OfflineActivity offlineActivity);
 
     Application applictaion();
 }

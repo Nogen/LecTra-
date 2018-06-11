@@ -13,6 +13,7 @@ import com.example.utente_pc1.provamvvm.util.exceptions.ConnectionException;
 import com.example.utente_pc1.provamvvm.util.exceptions.LoginException;
 import com.example.utente_pc1.provamvvm.util.task.NetCustomTask;
 
+import java.net.ConnectException;
 import java.util.List;
 
 public class ListItemViewModel extends ViewModel {
@@ -37,6 +38,22 @@ public class ListItemViewModel extends ViewModel {
 
     public LiveData<List<ListItemSubj>> getListFilteredDate(String date) {
         return this.subjectRepository.getListItemFilteredCollectionDate(date);
+    }
+
+    public void Logout() {
+        CustomTask t = new CustomTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    subjectRepository.Logout();
+                } catch (ConnectionException e) {
+                    e.printStackTrace();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+        t.execute();
     }
 
     public void deleteItem(final ListItemSubj listItemSubj){

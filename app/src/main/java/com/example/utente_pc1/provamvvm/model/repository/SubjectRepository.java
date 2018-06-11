@@ -58,13 +58,17 @@ public class SubjectRepository {
         this.listItemSubjDao.deleteListItemSubj(listItemSubj);
     }
 
-    /*----------------------------------- GROUPS --------------------------------*/
-    public LiveData<List<GroupSubj>> getGroups() {
-        return this.listItemSubjDao.getGroups();
+    public void Logout() throws ConnectionException {
+        this.esse3Api.Logout();
     }
 
-    public LiveData<Float> getTotalGrupHours(String groupName) {
-        return this.listItemSubjDao.getTotalGrupHours(groupName);
+    /*----------------------------------- GROUPS --------------------------------*/
+    public LiveData<List<GroupSubj>> getGroups(String userName) {
+        return this.listItemSubjDao.getGroups(userName);
+    }
+
+    public LiveData<Float> getTotalGrupHours(String groupName, String userName) {
+        return this.listItemSubjDao.getTotalGrupHours(groupName, userName);
     }
 
     public void insertGroupSubj(GroupSubj groupSubj) {
@@ -76,24 +80,24 @@ public class SubjectRepository {
     }
 
     /*----------------------------------- SINGLE SUBJ --------------------------------*/
-    public LiveData<List<SingleSubj>> getSubjs() {
-        return this.listItemSubjDao.getSubjs();
+    public LiveData<List<SingleSubj>> getSubjs(String userName) {
+        return this.listItemSubjDao.getSubjs(userName);
     }
 
-    public LiveData<List<SingleSubj>> getSubjsbyGroup(String groupName) {
-        return this.listItemSubjDao.getSubjsbyGroup(groupName);
+    public LiveData<List<SingleSubj>> getSubjsbyGroup(String groupName, String userName) {
+        return this.listItemSubjDao.getSubjsbyGroup(groupName, userName);
     }
 
-    public LiveData<Float> getSingleSubjHours(String subjName) {
-        return this.listItemSubjDao.getSingleSubjHours(subjName);
+    public LiveData<Float> getSingleSubjHours(String subjName, String userName) {
+        return this.listItemSubjDao.getSingleSubjHours(subjName, userName);
     }
 
     public List<SingleSubj> getNetSingleSubj() throws ConnectionException, LoginException {
         return this.esse3Api.getSubjs();
     }
 
-    public void deleteAllsubj() {
-        this.listItemSubjDao.deleteAllsubj();
+    public void deleteAllsubj(String userName) {
+        this.listItemSubjDao.deleteAllsubj(userName);
     }
 
     public void insertSingleSubjs(SingleSubj singleSubj) {

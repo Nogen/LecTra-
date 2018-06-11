@@ -26,9 +26,11 @@ public class NetCustomTask extends AsyncTask<Void, Void, Void> {
         try {
             datalist = repository.getNetSingleSubj();
         } catch (LoginException e) {
-
+            e.printStackTrace();
         } catch (ConnectionException e2) {
-
+            e2.printStackTrace();
+        } catch (Exception e3) {
+            e3.printStackTrace();
         }
         return null;
     }
