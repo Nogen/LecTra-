@@ -75,7 +75,7 @@ public class SubjectRepository {
         this.listItemSubjDao.insertGroupSubj(groupSubj);
     }
 
-    public LiveData<List<GroupSubj>> getNetGroups() throws ConnectionException, LoginException {
+    public List<GroupSubj> getNetGroups() throws ConnectionException, LoginException {
         return this.esse3Api.getBlocks();
     }
 

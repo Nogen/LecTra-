@@ -164,8 +164,7 @@ public class Esse3Api {
     }
 
 
-    public LiveData<List<GroupSubj>> getBlocks() throws ConnectionException, LoginException {
-        MutableLiveData<List<GroupSubj>> listLiveData = new MutableLiveData<List<GroupSubj>>();
+    public List<GroupSubj> getBlocks() throws ConnectionException, LoginException {
         List<GroupSubj> blocks = new ArrayList<>();
 
         List<String> blockname = this.getSubjects();
@@ -174,8 +173,7 @@ public class Esse3Api {
             Float hours = this.getTotalBlockHours(sub);
             blocks.add(new GroupSubj(sub, hours));
         }
-        listLiveData.setValue(blocks);
-        return listLiveData;
+        return blocks;
     }
 
     public List<SingleSubj> getSubjs() throws ConnectionException, LoginException {
