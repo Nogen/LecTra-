@@ -35,7 +35,9 @@ public class DetailActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TextView texthours;
     private TextView textSubjHours;
+    private TextView txtpercent;
     private String userName;
+    private Float percent = 100f;
 
 
     @Inject
@@ -69,6 +71,7 @@ public class DetailActivity extends AppCompatActivity {
 
         texthours = (TextView) findViewById(R.id.txtdt_totalhours);
         textSubjHours = (TextView) findViewById(R.id.txtdt_totalsubjhours);
+        txtpercent = (TextView) findViewById(R.id.txtdt_percent);
 
         TextView textname = (TextView) findViewById(R.id.txtv_name);
 
@@ -84,7 +87,9 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Integer integer) {
                 if (integer != null) {
-                    texthours.setText(String.valueOf(integer));
+                    texthours.setText("[" + String.valueOf(integer));
+                    percent *= integer;
+                    txtpercent.setText("-> " + String.format("%.2f", percent) + "%");
                 }
             }
         });
@@ -93,7 +98,9 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Float aFloat) {
                 if (aFloat != null) {
-                    textSubjHours.setText(" / " + aFloat.toString());
+                    textSubjHours.setText(" / " + aFloat.toString() + "]");
+                    percent /= aFloat;
+                    txtpercent.setText("-> " + String.format("%.2f", percent) + "%");
                 }
             }
         });

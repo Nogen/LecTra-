@@ -80,7 +80,6 @@ public class Esse3Api {
     }
 
     public List<String> getSubjects() throws ConnectionException, LoginException {
-        Log.d("CHEBALLE", this.subSubjs.toString());
         List<String> subjects = new ArrayList<String>();
 
         if (domLibretto.isEmpty()) {
@@ -130,6 +129,7 @@ public class Esse3Api {
             blockSubjHours.put(
                     elements.get(i)
                             .text()
+                            .split("-")[0]
                             .trim(),
                     Float.valueOf(elements.get(i + div - 1)
                             .text()

@@ -10,8 +10,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import android.support.design.widget.BaseTransientBottomBar;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -52,6 +54,7 @@ public class ListActivity extends AppCompatActivity {
     CustomViewModelFactory vFactory;
     List<ListItemSubj> listOfData;
     private LayoutInflater layoutInflater;
+    private DrawerLayout drawerLayout;
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private CustomAdapter customAdapter;
@@ -74,7 +77,18 @@ public class ListActivity extends AppCompatActivity {
         userName = i.getExtras().getString(USER);
 
         layoutInflater = getLayoutInflater();
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                item.setChecked(true);
+                drawerLayout.closeDrawers();
+                menuAction(item.getItemId());
+                return true;
+            }
+        });
         Toolbar toolbar = (Toolbar) findViewById(R.id.tlb_list_activity);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.list_of_lessons);
@@ -104,22 +118,30 @@ public class ListActivity extends AppCompatActivity {
         });
     }
 
+
+    private void menuAction(int id) {
+        switch (id) {
+            case R.id.action_logout:
+            case R.id.nav_logout:
+                vFactory.create(ListItemViewModel.class).Logout();
+                Intent i = new Intent(this, LoginActivity.class);
+                startActivity(i);
+                finish();
+                break;
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.logoutmenu, menu);
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        if (id == R.id.action_logout) {
-            vFactory.create(ListItemViewModel.class).Logout();
-            Intent i = new Intent(this, LoginActivity.class);
-            startActivity(i);
-            finish();
-        }
+        menuAction(id);
         return super.onOptionsItemSelected(item);
     }
 
