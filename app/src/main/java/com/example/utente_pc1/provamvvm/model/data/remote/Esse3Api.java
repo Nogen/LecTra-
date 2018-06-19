@@ -113,16 +113,9 @@ public class Esse3Api {
         this.requester.setUrl(URLBASE + this.subSubjs.get(subj));
         String html = this.requester.retriveDom();
 
-        /*
-        int chunk = 1000;
-        for (int i = 0; i < html.length(); i += chunk) {
-            Log.d("HTML", html.substring(i, Math.min(html.length(), i + chunk)));
-        }
-        */
         doc = Jsoup.parse(html);
         elements = doc.select("th.detail_table");
         div = elements.size();
-        //counter = 0;
         elements = doc.select("td.detail_table");
 
         for (int i = 0; i < elements.size() - (div - 1); i += div) {
@@ -136,21 +129,6 @@ public class Esse3Api {
                             .trim())
             );
         }
-        /*
-        for (Element e : elements) {
-            counter = counter % div;
-            if (counter == 0) {
-                key = e.text()
-                        .split("-")[0]
-                        .trim();
-            } else if (counter == div - 1) {
-                value = Float.valueOf(e.
-                        text()
-                        .trim());
-                blockSubjHours.put(key, value);
-            }
-            counter++;
-        }*/
         return blockSubjHours;
     }
 

@@ -7,11 +7,11 @@
             android:title="Group list" />
         <item
             android:id="@+id/nav_refreshdata"
-            android:icon="@android:drawable/ic_menu_rotate"
+            android:icon="@drawable/baseline-info-24px"
             android:title="Refresh data" />
         <item
             android:id="@+id/nav_info"
-            android:icon="@android:drawable/ic_menu_info_details"
+            android:icon="@drawable/baseline_arrow_white_18dp"
             android:title="Infos" />
         <item
             android:id="@+id/nav_logout"
