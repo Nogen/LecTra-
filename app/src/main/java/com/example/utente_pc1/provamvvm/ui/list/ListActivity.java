@@ -13,7 +13,9 @@ import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -91,7 +93,12 @@ public class ListActivity extends AppCompatActivity {
         });
         Toolbar toolbar = (Toolbar) findViewById(R.id.tlb_list_activity);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.list_of_lessons);
+
+        ActionBar tool = getSupportActionBar();
+        tool.setTitle(R.string.list_of_lessons);
+        tool.setDisplayHomeAsUpEnabled(true);
+        tool.setHomeAsUpIndicator(R.drawable.ic_drawermenu_24dp);
+
 
 
         recyclerView = (RecyclerView) findViewById(R.id.rec_list);
@@ -128,16 +135,20 @@ public class ListActivity extends AppCompatActivity {
                 startActivity(i);
                 finish();
                 break;
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                break;
         }
     }
 
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.logoutmenu, menu);
         return true;
     }
 
-
+    */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

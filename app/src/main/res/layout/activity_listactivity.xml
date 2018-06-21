@@ -117,6 +117,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/menudrawer" />
+        app:menu="@menu/menudrawer"
+        app:headerLayout="@layout/header" />
 
 </android.support.v4.widget.DrawerLayout>
