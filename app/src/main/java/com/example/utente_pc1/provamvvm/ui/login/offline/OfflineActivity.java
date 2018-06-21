@@ -1,6 +1,7 @@
 package com.example.utente_pc1.provamvvm.ui.login.offline;
 
 import android.arch.lifecycle.Observer;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -42,6 +43,7 @@ public class OfflineActivity extends AppCompatActivity {
     private Button signButton;
     private List<UserLogin> loginsData;
     private String userName;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class OfflineActivity extends AppCompatActivity {
                 .getLecComponent()
                 .inject(this);
 
+        context = this;
         loginViewModel = wFactory.create(LoginViewModel.class);
         layoutInflater = getLayoutInflater();
         password = (EditText) findViewById(R.id.off_password);
@@ -64,7 +67,7 @@ public class OfflineActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String psw = password.getText().toString();
                 if (psw == null || userName == null) {
-                    Toast.makeText(OfflineActivity.this,
+                    Toast.makeText(context,
                             "You have to insert all info!",
                             Toast.LENGTH_SHORT);
                 } else {
@@ -74,7 +77,7 @@ public class OfflineActivity extends AppCompatActivity {
                             if (s != null && s.equals(psw)) {
                                 toHome();
                             } else {
-                                Toast.makeText(OfflineActivity.this,
+                                Toast.makeText(context,
                                         "Wrong password!",
                                         Toast.LENGTH_SHORT);
                             }
