@@ -6,10 +6,6 @@
             android:icon="@drawable/baseline_format_list_bulleted_black_18dp"
             android:title="Group list" />
         <item
-            android:id="@+id/nav_refreshdata"
-            android:icon="@drawable/baseline_update_black_18dp"
-            android:title="Refresh data" />
-        <item
             android:id="@+id/nav_info"
             android:icon="@drawable/baseline_info_black_18dp"
             android:title="Infos" />

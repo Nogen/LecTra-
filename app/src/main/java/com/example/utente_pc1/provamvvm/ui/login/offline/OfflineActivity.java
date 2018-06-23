@@ -66,10 +66,10 @@ public class OfflineActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String psw = password.getText().toString();
-                if (psw == null || userName == null) {
+                if (psw.isEmpty()) {
                     Toast.makeText(context,
-                            "You have to insert all info!",
-                            Toast.LENGTH_SHORT);
+                            "You have to insert the password!",
+                            Toast.LENGTH_SHORT).show();
                 } else {
                     loginViewModel.isUserThere(userName).observe(OfflineActivity.this, new Observer<String>() {
                         @Override
@@ -79,7 +79,7 @@ public class OfflineActivity extends AppCompatActivity {
                             } else {
                                 Toast.makeText(context,
                                         "Wrong password!",
-                                        Toast.LENGTH_SHORT);
+                                        Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
