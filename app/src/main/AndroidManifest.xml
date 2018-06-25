@@ -35,7 +35,9 @@
         <activity
             android:name=".ui.detail.DetailActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.login.offline.OfflineActivity"></activity>
+        <activity android:name=".ui.login.offline.OfflineActivity" />
+        <activity android:name=".ui.group.GroupListActivity" />
+        <activity android:name=".ui.info.InfoActivity"></activity>
     </application>
 
 </manifest>

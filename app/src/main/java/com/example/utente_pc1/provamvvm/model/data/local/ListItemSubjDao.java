@@ -48,6 +48,9 @@ public interface ListItemSubjDao {
     @Query("SELECT totalHours FROM groupsubj WHERE GroupName = :groupName AND userName = :userName")
     public LiveData<Float> getTotalGrupHours(String groupName, String userName);
 
+    @Query("SELECT SUM(hours) FROM listitemsubj WHERE loginName = :userName AND name IN (SELECT subjName FROM singlesubj WHERE groupName = :groupName AND userName = :userName)")
+    public LiveData<Float> getCurrentHourPerGroup(String groupName, String userName);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertGroupSubj(GroupSubj groupSubj);
 
