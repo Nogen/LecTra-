@@ -71,6 +71,10 @@ public class SubjectRepository {
         return this.listItemSubjDao.getTotalGrupHours(groupName, userName);
     }
 
+    public LiveData<Float> getCurrentHourPerGroup(String groupName, String userName) {
+        return this.listItemSubjDao.getCurrentHourPerGroup(groupName, userName);
+    }
+
     public void insertGroupSubj(GroupSubj groupSubj) {
         this.listItemSubjDao.insertGroupSubj(groupSubj);
     }
