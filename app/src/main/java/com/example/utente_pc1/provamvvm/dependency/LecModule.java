@@ -4,8 +4,6 @@ import android.app.Application;
 
 import com.example.utente_pc1.provamvvm.LecApplication;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 

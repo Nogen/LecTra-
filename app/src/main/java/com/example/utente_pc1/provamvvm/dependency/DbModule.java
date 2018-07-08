@@ -16,7 +16,7 @@ import dagger.Provides;
 
 @Module
 public class DbModule {
-    Subjectdb db;
+    private Subjectdb db;
 
     public DbModule(Application application) {
         db = Room.databaseBuilder(application,

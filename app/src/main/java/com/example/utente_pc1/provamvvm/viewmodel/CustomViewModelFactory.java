@@ -9,6 +9,7 @@ import com.example.utente_pc1.provamvvm.model.repository.SubjectRepository;
 import javax.inject.Inject;
 
 
+@SuppressWarnings("ALL")
 public class CustomViewModelFactory implements ViewModelProvider.Factory {
 
     private SubjectRepository subjectRepository;
@@ -19,6 +20,7 @@ public class CustomViewModelFactory implements ViewModelProvider.Factory {
     }
 
 
+    @SuppressWarnings("unchecked")
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {

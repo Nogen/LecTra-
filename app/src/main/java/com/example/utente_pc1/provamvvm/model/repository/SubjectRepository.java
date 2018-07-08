@@ -8,8 +8,7 @@ import com.example.utente_pc1.provamvvm.model.data.local.ListItemSubjDao;
 import com.example.utente_pc1.provamvvm.model.data.local.SingleSubj;
 import com.example.utente_pc1.provamvvm.model.data.local.UserLogin;
 import com.example.utente_pc1.provamvvm.model.data.remote.Esse3Api;
-import com.example.utente_pc1.provamvvm.util.exceptions.ConnectionException;
-import com.example.utente_pc1.provamvvm.util.exceptions.LoginException;
+
 
 import java.util.List;
 
@@ -58,7 +57,7 @@ public class SubjectRepository {
         this.listItemSubjDao.deleteListItemSubj(listItemSubj);
     }
 
-    public void Logout() throws ConnectionException {
+    public void Logout() throws Exception{
         this.esse3Api.Logout();
     }
 
@@ -67,7 +66,7 @@ public class SubjectRepository {
         return this.listItemSubjDao.getGroups(userName);
     }
 
-    public LiveData<Float> getTotalGrupHours(String groupName, String userName) {
+    public LiveData<Float> getTotalGroupHours(String groupName, String userName) {
         return this.listItemSubjDao.getTotalGrupHours(groupName, userName);
     }
 
@@ -79,7 +78,7 @@ public class SubjectRepository {
         this.listItemSubjDao.insertGroupSubj(groupSubj);
     }
 
-    public List<GroupSubj> getNetGroups() throws ConnectionException, LoginException {
+    public List<GroupSubj> getNetGroups() throws Exception  {
         return this.esse3Api.getBlocks();
     }
 
@@ -96,7 +95,7 @@ public class SubjectRepository {
         return this.listItemSubjDao.getSingleSubjHours(subjName, userName);
     }
 
-    public List<SingleSubj> getNetSingleSubj() throws ConnectionException, LoginException {
+    public List<SingleSubj> getNetSingleSubj() throws Exception {
         return this.esse3Api.getSubjs();
     }
 
@@ -109,7 +108,7 @@ public class SubjectRepository {
     }
 
     /*----------------------------------- USERS --------------------------------*/
-    public void Login(String name, String password) throws ConnectionException, LoginException {
+    public void Login(String name, String password) throws Exception {
         this.esse3Api.Login(name, password);
     }
 

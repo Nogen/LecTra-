@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_detail_date"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.detail.DetailActivity">
@@ -10,12 +9,13 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/tlb_activity_detail"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="?android:attr/colorPrimary"
         android:elevation="4dp"
         app:titleTextColor="@color/textOnDark"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        tools:targetApi="lollipop" />
 
 
     <View
@@ -62,7 +62,6 @@
         app:layout_constraintEnd_toStartOf="@+id/txtdt_percent"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
-    />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rec_dates"
@@ -136,7 +135,8 @@
         app:layout_constraintBottom_toBottomOf="@id/rect_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tlb_activity_detail" />
+        app:layout_constraintTop_toBottomOf="@+id/tlb_activity_detail"
+        tools:targetApi="lollipop" />
 
     <View
         android:id="@+id/divider2"
@@ -158,7 +158,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 

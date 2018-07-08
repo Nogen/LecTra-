@@ -10,23 +10,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.utente_pc1.provamvvm.ui.login.LoginActivity">
 
-    <ScrollView
-        android:id="@+id/login_form"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/email_login_form"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
 
             <ImageView
                 android:layout_width="173dp"
                 android:layout_height="153dp"
                 android:src="@drawable/lectralogo"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/todo" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -80,6 +70,6 @@
                 android:layout_marginTop="15dp" />
 
 
-        </LinearLayout>
-    </ScrollView>
+
+
 </LinearLayout>

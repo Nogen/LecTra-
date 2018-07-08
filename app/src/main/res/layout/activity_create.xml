@@ -5,18 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/root_activity_create"
-    android:transitionName="@string/transition_button">
+    android:transitionName="@string/transition_button"
+    tools:targetApi="lollipop">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tlb_activity_create"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="?android:attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:titleTextColor="@color/textOnDark"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        tools:targetApi="lollipop" />
 
     <CalendarView
         android:id="@+id/calendar_activity_create"
@@ -30,7 +31,8 @@
         android:datePickerMode="calendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tlb_activity_create"></CalendarView>
+        app:layout_constraintTop_toBottomOf="@+id/tlb_activity_create"
+        tools:targetApi="lollipop" />
 
     <Spinner
         android:id="@+id/spin_subj"

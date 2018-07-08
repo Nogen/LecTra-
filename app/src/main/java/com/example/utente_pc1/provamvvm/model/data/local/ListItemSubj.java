@@ -1,8 +1,6 @@
 package com.example.utente_pc1.provamvvm.model.data.local;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 @Entity(primaryKeys = {"name", "date"})

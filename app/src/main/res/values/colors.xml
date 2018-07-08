@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#b39ddb</color>
     <color name="colorPrimaryDark">#836fa9</color>
     <color name="colorAccent">#ff76a5</color>
 
     <color name="textOnDark">#FFFFFF</color>
-    <color name="textOnLight">#000000</color>
+    <color name="textOnLight" tools:keep="@color/textOnLight">#000000</color>
 </resources>

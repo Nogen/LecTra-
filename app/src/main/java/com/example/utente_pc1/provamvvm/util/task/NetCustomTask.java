@@ -5,8 +5,6 @@ import android.os.AsyncTask;
 
 import com.example.utente_pc1.provamvvm.model.data.local.SingleSubj;
 import com.example.utente_pc1.provamvvm.model.repository.SubjectRepository;
-import com.example.utente_pc1.provamvvm.util.exceptions.ConnectionException;
-import com.example.utente_pc1.provamvvm.util.exceptions.LoginException;
 
 import java.util.List;
 
@@ -25,12 +23,8 @@ public class NetCustomTask extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... voids) {
         try {
             datalist = repository.getNetSingleSubj();
-        } catch (LoginException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (ConnectionException e2) {
-            e2.printStackTrace();
-        } catch (Exception e3) {
-            e3.printStackTrace();
         }
         return null;
     }

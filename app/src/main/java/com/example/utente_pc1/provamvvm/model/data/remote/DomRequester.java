@@ -1,7 +1,5 @@
 package com.example.utente_pc1.provamvvm.model.data.remote;
 
-import com.example.utente_pc1.provamvvm.util.exceptions.ConnectionException;
-import com.example.utente_pc1.provamvvm.util.exceptions.LoginException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,26 +9,25 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import android.util.Base64;
-import android.util.Log;
 
 
-public class DomRequester {
+class DomRequester {
     private static final String AUTH = "Authorization";
     private static final String COOKIE = "Cookie";
     private static final String SET_COOKIE = "Set-Cookie";
     private static final String BASIC = "Basic ";
 
     private String base64Auth;
-    private String cookie = new String("");
+    private String cookie = "";
     private URL url = null;
     private HttpURLConnection connection;
-    private ConnectionException error = new ConnectionException("Internet connection missing!");
+    private Exception error = new Exception("Internet connection missing!");
 
     public DomRequester() {
 
     }
 
-    public DomRequester(String name, String password) {
+    private DomRequester(String name, String password) {
         this.setAuthentication(name, password);
     }
 
@@ -42,12 +39,12 @@ public class DomRequester {
     public void setAuthentication(String name, String password) {
         String auth = name + ":" + password;
         this.base64Auth = Base64.encodeToString(auth.getBytes(), Base64.DEFAULT);
-        this.cookie = new String();
+        this.cookie = "";
     }
 
     public void resetAuthentication() {
-        this.base64Auth = new String();
-        this.cookie = new String();
+        this.base64Auth = "";
+        this.cookie = "";
     }
 
     public void setUrl(String url) {
@@ -58,7 +55,7 @@ public class DomRequester {
         }
     }
 
-    private void retCookie() throws ConnectionException {
+    private void retCookie() throws Exception {
         if (this.url == null) {
             throw error;
         }
@@ -70,10 +67,7 @@ public class DomRequester {
             this.cookie = (tmpcookie != null) ? tmpcookie : this.cookie;
 
         } catch (IOException e) {
-            //e.printStackTrace();
             throw error;
-        } catch (Exception e1) {
-            //e1.printStackTrace();
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -82,11 +76,11 @@ public class DomRequester {
     }
 
 
-    public String retriveDom() throws ConnectionException, LoginException {
+    public String retriveDom() throws Exception {
         if (this.cookie.isEmpty()) {
             this.retCookie();
         }
-        String dom = new String();
+        StringBuilder dom = new StringBuilder();
         String line;
         try {
             connection = (HttpURLConnection) this.url.openConnection();
@@ -95,22 +89,14 @@ public class DomRequester {
             BufferedReader bufferedReader = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {
-                dom += line + "\n";
+                dom.append(line).append("\n");
             }
-            return dom;
+            return dom.toString();
 
-        } catch (IOException e) {
-            //e.printStackTrace();
-            if (e instanceof ConnectException) {
-                throw error;
-            } else {
-                throw new LoginException("Wrong account name or password");
-            }
-
-        } catch (Exception e1) {
-            //e1.printStackTrace();
+        } catch(ConnectException e0) {
             throw error;
-
+        } catch (IOException e) {
+            throw new Exception("Wrong account name or password");
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -120,7 +106,7 @@ public class DomRequester {
     }
 
 
-    public void doSingleReq() throws ConnectionException {
+    public void doSingleReq() throws Exception {
         this.retCookie();
     }
 

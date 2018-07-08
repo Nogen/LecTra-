@@ -1,6 +1,5 @@
 package com.example.utente_pc1.provamvvm.ui.detail;
 
-import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -23,6 +22,7 @@ import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;
 import com.example.utente_pc1.provamvvm.viewmodel.DetailItemViewModel;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -58,22 +58,22 @@ public class DetailActivity extends AppCompatActivity {
 
         layoutInflater = getLayoutInflater();
 
-        recyclerView = (RecyclerView) findViewById(R.id.rec_dates);
+        recyclerView = findViewById(R.id.rec_dates);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tlb_activity_detail);
+        Toolbar toolbar = findViewById(R.id.tlb_activity_detail);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(R.string.detail);
 
 
-        texthours = (TextView) findViewById(R.id.txtdt_totalhours);
-        textSubjHours = (TextView) findViewById(R.id.txtdt_totalsubjhours);
-        txtpercent = (TextView) findViewById(R.id.txtdt_percent);
+        texthours = findViewById(R.id.txtdt_totalhours);
+        textSubjHours = findViewById(R.id.txtdt_totalsubjhours);
+        txtpercent = findViewById(R.id.txtdt_percent);
 
-        TextView textname = (TextView) findViewById(R.id.txtv_name);
+        TextView textname = findViewById(R.id.txtv_name);
 
         DetailItemViewModel detailItemViewModel = vFactory.create(DetailItemViewModel.class);
 
@@ -87,9 +87,9 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Integer integer) {
                 if (integer != null) {
-                    texthours.setText("[" + String.valueOf(integer));
+                    texthours.setText(String.format(Locale.US, "[%d", integer));
                     percent *= integer;
-                    txtpercent.setText("-> " + String.format("%.2f", percent) + "%");
+                    txtpercent.setText(String.format(Locale.US, "-> %.2f%s", percent, "%"));
                 }
             }
         });
@@ -98,9 +98,9 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Float aFloat) {
                 if (aFloat != null) {
-                    textSubjHours.setText(" / " + aFloat.toString() + "]");
+                    textSubjHours.setText(String.format(Locale.US, "/%.2f]", aFloat));
                     percent /= aFloat;
-                    txtpercent.setText("-> " + String.format("%.2f", percent) + "%");
+                    txtpercent.setText(String.format(Locale.US, "-> %.2f%s", percent, "%"));
                 }
             }
         });
@@ -163,11 +163,11 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         class CustomViewHolder extends RecyclerView.ViewHolder {
-            private TextView textView;
+            private final TextView textView;
 
-            public CustomViewHolder(View view) {
+            CustomViewHolder(View view) {
                 super(view);
-                this.textView = (TextView) view.findViewById(R.id.txtdtrec_dates);
+                this.textView = view.findViewById(R.id.txtdtrec_dates);
             }
         }
     }

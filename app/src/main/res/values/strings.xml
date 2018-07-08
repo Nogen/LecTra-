@@ -2,7 +2,6 @@
     <string name="app_name">Lectra</string>
     <string name="detail">Details</string>
     <string name="add_item">Add Item</string>
-    <string name="list">Subjects List</string>
     <string name="delete_item">1 item is deleted</string>
     <string name="undo">Undo?</string>
     <string name="transition_name">transition_name</string>
@@ -17,10 +16,13 @@
     <string name="subject">Subject:</string>
     <string name="n_hours">N° hours:</string>
     <string name="insert_number_of_hours_here">Insert number of hours here</string>
-    <string name="lectra">LecTra</string>
-    <string name="todo">TODO</string>
-    <string name="title_activity_loading_activity">LoadingActivity</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="todo">logo</string>
+    <string name="logged_account">List of logged account: </string>
+    <string name="calendar">calendar</string>
+    <string name="drawer_title">My Options</string>
+    <string name="group_list">Group list</string>
+    <string name="infos">Infos</string>
+    <string name="logout">Logout</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Account Name</string>

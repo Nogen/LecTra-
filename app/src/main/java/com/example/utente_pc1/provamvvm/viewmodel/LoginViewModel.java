@@ -7,8 +7,6 @@ import android.arch.lifecycle.ViewModel;
 import com.example.utente_pc1.provamvvm.model.data.local.SingleSubj;
 import com.example.utente_pc1.provamvvm.model.data.local.UserLogin;
 import com.example.utente_pc1.provamvvm.model.repository.SubjectRepository;
-import com.example.utente_pc1.provamvvm.util.exceptions.ConnectionException;
-import com.example.utente_pc1.provamvvm.util.exceptions.LoginException;
 import com.example.utente_pc1.provamvvm.util.task.CustomTask;
 import com.example.utente_pc1.provamvvm.util.task.NetCustomTask;
 
@@ -22,7 +20,7 @@ public class LoginViewModel extends ViewModel {
     }
 
 
-    public void logIn(String name, String password) throws LoginException, ConnectionException {
+    public void logIn(String name, String password) throws Exception {
         subjectRepository.Login(name, password);
     }
 
@@ -61,7 +59,6 @@ public class LoginViewModel extends ViewModel {
             @Override
             public void run() {
                 subjectRepository.deleteAllsubj(userName);
-                return;
             }
         });
         deleteall.execute();

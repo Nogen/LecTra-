@@ -11,7 +11,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import android.view.WindowManager;
@@ -28,12 +27,8 @@ import com.example.utente_pc1.provamvvm.model.data.local.UserLogin;
 import com.example.utente_pc1.provamvvm.ui.list.ListActivity;
 
 import com.example.utente_pc1.provamvvm.ui.login.offline.OfflineActivity;
-import com.example.utente_pc1.provamvvm.util.exceptions.ConnectionException;
-import com.example.utente_pc1.provamvvm.util.exceptions.LoginException;
 import com.example.utente_pc1.provamvvm.viewmodel.CustomViewModelFactory;
 import com.example.utente_pc1.provamvvm.viewmodel.LoginViewModel;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -45,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Inject
     CustomViewModelFactory wFactory;
-    LoginViewModel loginViewModel;
+    private LoginViewModel loginViewModel;
     private LifecycleOwner context;
     private EditText nametext;
     private EditText password;
@@ -68,10 +63,10 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel = wFactory.create(LoginViewModel.class);
         context = this;
         progressDialog = new ProgressDialog(this);
-        nametext = (EditText) findViewById(R.id.account);
-        password = (EditText) findViewById(R.id.password);
-        login = (Button) findViewById(R.id.email_sign_in_button);
-        offlinelink = (TextView) findViewById(R.id.txtlog_offlinelogin);
+        nametext = findViewById(R.id.account);
+        password = findViewById(R.id.password);
+        login = findViewById(R.id.email_sign_in_button);
+        offlinelink = findViewById(R.id.txtlog_offlinelogin);
 
         offlinelink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,14 +94,8 @@ public class LoginActivity extends AppCompatActivity {
                         protected Void doInBackground(Void... voids) {
                             try {
                                 loginViewModel.logIn(accountName, psw);
-                            } catch (ConnectionException e) {
-                                e.printStackTrace();
+                            } catch (Exception e) {
                                 errormessage = e.getMessage();
-                            } catch (LoginException e1) {
-                                e1.printStackTrace();
-                                errormessage = e1.getMessage();
-                            } catch (Exception e2) {
-                                e2.printStackTrace();
                             }
                             return null;
                         }

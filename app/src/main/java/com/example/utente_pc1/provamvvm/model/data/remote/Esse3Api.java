@@ -1,13 +1,7 @@
 package com.example.utente_pc1.provamvvm.model.data.remote;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
-
 import com.example.utente_pc1.provamvvm.model.data.local.GroupSubj;
 import com.example.utente_pc1.provamvvm.model.data.local.SingleSubj;
-import com.example.utente_pc1.provamvvm.util.exceptions.ConnectionException;
-import com.example.utente_pc1.provamvvm.util.exceptions.LoginException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,6 +11,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Esse3Api {
     private static final String URLBASE =
@@ -35,32 +30,32 @@ public class Esse3Api {
 
     public Esse3Api() {
         this.requester = new DomRequester();
-        domLibretto = new String();
+        domLibretto = "";
         subSubjs = new HashMap<>();
     }
 
-    public void Login(String name, String password) throws ConnectionException, LoginException {
+    public void Login(String name, String password) throws Exception {
         this.requester.setAuthentication(name, password);
         this.requester.setUrl(URLLOGIN);
         this.requester.retriveDom();
     }
 
-    public void Logout() throws ConnectionException {
+    public void Logout() throws Exception {
         this.requester.setUrl(URLLOGOUT);
         this.requester.doSingleReq();
         this.requester.resetAuthentication();
-        domLibretto = new String();
+        domLibretto = "";
         subSubjs = new HashMap<>();
     }
 
 
-    private void retriveDomLibretto() throws ConnectionException, LoginException {
+    private void retriveDomLibretto() throws Exception{
         this.requester.setUrl(URLLIBRETTO);
         this.domLibretto = this.requester.retriveDom();
     }
 
-    public List<Float> getAvrg() throws ConnectionException, LoginException {
-        List<Float> avrgVotes = new ArrayList<Float>();
+    public List<Float> getAvrg() throws Exception {
+        List<Float> avrgVotes = new ArrayList<>();
 
         if (domLibretto.isEmpty()) {
             this.retriveDomLibretto();
@@ -79,8 +74,8 @@ public class Esse3Api {
         return avrgVotes;
     }
 
-    public List<String> getSubjects() throws ConnectionException, LoginException {
-        List<String> subjects = new ArrayList<String>();
+    public List<String> getSubjects() throws Exception {
+        List<String> subjects = new ArrayList<>();
 
         if (domLibretto.isEmpty()) {
             this.retriveDomLibretto();
@@ -98,12 +93,9 @@ public class Esse3Api {
     }
 
 
-    public HashMap<String, Float> getDetailSubj(String subj) throws ConnectionException, LoginException {
+    public Map<String, Float> getDetailSubj(String subj) throws Exception {
         HashMap<String, Float> blockSubjHours = new HashMap<>();
         int div;
-        int counter = 0;
-        String key = new String();
-        Float value = new Float(0);
         Document doc;
         Elements elements;
 
@@ -132,9 +124,9 @@ public class Esse3Api {
         return blockSubjHours;
     }
 
-    public Float getTotalBlockHours(String subj) throws ConnectionException, LoginException {
-        HashMap<String, Float> res = this.getDetailSubj(subj);
-        Float totalHours = new Float(0);
+    public Float getTotalBlockHours(String subj) throws Exception {
+        Map<String, Float> res = this.getDetailSubj(subj);
+        Float totalHours = 0f;
         for (Float hrs : res.values()) {
             totalHours += hrs;
         }
@@ -142,7 +134,7 @@ public class Esse3Api {
     }
 
 
-    public List<GroupSubj> getBlocks() throws ConnectionException, LoginException {
+    public List<GroupSubj> getBlocks() throws Exception {
         List<GroupSubj> blocks = new ArrayList<>();
 
         List<String> blockname = this.getSubjects();
@@ -154,16 +146,16 @@ public class Esse3Api {
         return blocks;
     }
 
-    public List<SingleSubj> getSubjs() throws ConnectionException, LoginException {
+    public List<SingleSubj> getSubjs() throws Exception {
         List<SingleSubj> subjects = new ArrayList<>();
-        HashMap<String, Float> tmpsubj;
+        Map<String, Float> tmpsubj;
 
         List<String> blockname = this.getSubjects();
 
         for (String sub : blockname) {
             tmpsubj = this.getDetailSubj(sub);
-            for (String subjName : tmpsubj.keySet()) {
-                subjects.add(new SingleSubj(subjName, sub, tmpsubj.get(subjName)));
+            for (Map.Entry<String, Float> pair : tmpsubj.entrySet()) {
+                subjects.add(new SingleSubj(pair.getKey(), sub, pair.getValue()));
             }
         }
         return subjects;

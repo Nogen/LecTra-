@@ -29,6 +29,7 @@ import com.example.utente_pc1.provamvvm.LecApplication;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -39,7 +40,6 @@ public class CreateActivity extends AppCompatActivity {
     @Inject
     CustomViewModelFactory wFactory;
     private Context context;
-    private CalendarView calendarView;
     private Spinner spinner;
     private EditText hours;
     private Button addbtn;
@@ -77,7 +77,7 @@ public class CreateActivity extends AppCompatActivity {
         wFactory.create(CreateItemViewModel.class).getSingleSubj(userName).observe(this, new Observer<List<SingleSubj>>() {
             @Override
             public void onChanged(@Nullable List<SingleSubj> singleSubjs) {
-                adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item);
+                adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item);
                 for (SingleSubj s : singleSubjs) {
                     adapter.add(s.getSubjName());
                 }
@@ -86,13 +86,13 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tlb_activity_create);
+        Toolbar toolbar = findViewById(R.id.tlb_activity_create);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(R.string.add_item);
 
-        final CalendarView calendarView = (CalendarView) findViewById(R.id.calendar_activity_create);
+        final CalendarView calendarView = findViewById(R.id.calendar_activity_create);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -103,19 +103,19 @@ public class CreateActivity extends AppCompatActivity {
         });
 
 
-        spinner = (Spinner)findViewById(R.id.spin_subj);
+        spinner = findViewById(R.id.spin_subj);
 
 
-        hours = (EditText)findViewById(R.id.txtcr_hours);
+        hours = findViewById(R.id.txtcr_hours);
 
-        addbtn = (Button) findViewById(R.id.btncr);
+        addbtn = findViewById(R.id.btncr);
 
 
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                SimpleDateFormat conv = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat conv = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
                 if (curdate == null) {
                     Date date = new Date(calendarView.getDate());
                     curdate = conv.format(date);
@@ -143,7 +143,7 @@ public class CreateActivity extends AppCompatActivity {
         return true;
     }
 
-    public void startListActivity() {
+    private void startListActivity() {
         Intent i = new Intent(this, ListActivity.class);
         i.putExtra(USER, userName);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

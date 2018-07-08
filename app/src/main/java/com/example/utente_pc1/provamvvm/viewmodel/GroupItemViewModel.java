@@ -21,7 +21,7 @@ public class GroupItemViewModel extends ViewModel {
     }
 
     public LiveData<Float> getTotalGrupHours(String groupName, String userName) {
-        return this.subjectRepository.getTotalGrupHours(groupName, userName);
+        return this.subjectRepository.getTotalGroupHours(groupName, userName);
     }
 
     public LiveData<Float> getCurrentHourPerGroup(String groupName, String userName) {

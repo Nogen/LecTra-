@@ -59,8 +59,8 @@ public class OfflineActivity extends AppCompatActivity {
         context = this;
         loginViewModel = wFactory.create(LoginViewModel.class);
         layoutInflater = getLayoutInflater();
-        password = (EditText) findViewById(R.id.off_password);
-        signButton = (Button) findViewById(R.id.off_button);
+        password = findViewById(R.id.off_password);
+        signButton = findViewById(R.id.off_button);
 
         signButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +87,7 @@ public class OfflineActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView = (RecyclerView) findViewById(R.id.offline_rec);
+        recyclerView = findViewById(R.id.offline_rec);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -147,10 +147,10 @@ public class OfflineActivity extends AppCompatActivity {
             private TextView accountname;
 
 
-            public CustomViewHolder(View itemView) {
+            CustomViewHolder(View itemView) {
                 super(itemView);
-                masterview = (ViewGroup) itemView.findViewById(R.id.root_login_item);
-                accountname = (TextView) itemView.findViewById(R.id.loginUsername);
+                masterview = itemView.findViewById(R.id.root_login_item);
+                accountname = itemView.findViewById(R.id.loginUsername);
                 masterview.setOnClickListener(this);
             }
 
